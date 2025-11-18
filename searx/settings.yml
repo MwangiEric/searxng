@@ -1,3 +1,5 @@
+use_default_settings: true
+
 general:
   debug: false
   instance_name: "SearXNG"
@@ -36,9 +38,9 @@ search:
 server:
   port: 8888
   bind_address: "0.0.0.0" # Allow external access
-  base_url: false  # Set to your domain if needed, e.g., https://your-domain.onrender.com
-  limiter: false  # Disabled for private use
-  public_instance: false  # Disabled to avoid forcing limiter
+  base_url: false # Set to your domain if needed, e.g., https://your-domain.onrender.com
+  limiter: false # Disabled for private use
+  public_instance: false # Disabled to avoid forcing limiter
   secret_key: "4Z2TOwrferSce2"
   image_proxy: false
   http_protocol_version: "1.1" # Use the latest protocol for better performance
