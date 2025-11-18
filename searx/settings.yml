@@ -39,7 +39,7 @@ server:
   base_url: false
   limiter: false
   public_instance: true  # Enable public instance features
-  secret_key: "ultrasecretkey"
+  secret_key: "4Z2TOwrferSce2"
   image_proxy: false
   http_protocol_version: "1.1"  # Use the latest protocol for better performance
   method: "GET"  # Use GET for better user experience
