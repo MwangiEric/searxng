@@ -37,7 +37,7 @@ server:
   port: 8888
   bind_address: "0.0.0.0"  # Allow external access
   base_url: false
-  limiter: false
+  limiter: true
   public_instance: true  # Enable public instance features
   secret_key: "4Z2TOwrferSce2"
   image_proxy: false
@@ -48,6 +48,10 @@ server:
     X-Download-Options: noopen
     X-Robots-Tag: noindex, nofollow
     Referrer-Policy: no-referrer
+
+valkey:
+  # URL to connect valkey database. Is overwritten by ${SEARXNG_VALKEY_URL}.
+  url: valkey://https://searxng-587s.onrender.com:6379/0
 
 ui:
   static_path: ""
