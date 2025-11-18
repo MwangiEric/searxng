@@ -15,34 +15,34 @@ brand:
   issue_url: https://github.com/searxng/searxng/issues
 
 search:
-  safe_search: 0  # No filtering
-  autocomplete: "duckduckgo"  # Enable a more reliable autocomplete source
+  safe_search: 0 # No filtering
+  autocomplete: "duckduckgo" # Enable a more reliable autocomplete source
   autocomplete_min: 4
-  favicon_resolver: "duckduckgo"  # Use a reliable favicon resolver
+  favicon_resolver: "duckduckgo" # Use a reliable favicon resolver
   default_lang: "auto"
-  ban_time_on_fail: 5  # Short fail ban time
-  max_ban_time_on_fail: 60  # Reduce max ban time
+  ban_time_on_fail: 5 # Short fail ban time
+  max_ban_time_on_fail: 60 # Reduce max ban time
   suspended_times:
-    SearxEngineAccessDenied: 3600  # Shorten suspension for access denied
-    SearxEngineCaptcha: 3600  # Shorten captcha suspension
-    SearxEngineTooManyRequests: 5  # Shorten too many requests suspension
+    SearxEngineAccessDenied: 3600 # Shorten suspension for access denied
+    SearxEngineCaptcha: 3600 # Shorten captcha suspension
+    SearxEngineTooManyRequests: 5 # Shorten too many requests suspension
     cf_SearxEngineCaptcha: 86400
     cf_SearxEngineAccessDenied: 86400
     recaptcha_SearxEngineCaptcha: 604800
   formats:
     - html
-     - json
+    - json
 
 server:
   port: 8888
-  bind_address: "0.0.0.0"  # Allow external access
-  base_url: false
-  limiter: true
-  public_instance: true  # Enable public instance features
+  bind_address: "0.0.0.0" # Allow external access
+  base_url: false  # Set to your domain if needed, e.g., https://your-domain.onrender.com
+  limiter: false  # Disabled for private use
+  public_instance: false  # Disabled to avoid forcing limiter
   secret_key: "4Z2TOwrferSce2"
   image_proxy: false
-  http_protocol_version: "1.1"  # Use the latest protocol for better performance
-  method: "GET"  # Use GET for better user experience
+  http_protocol_version: "1.1" # Use the latest protocol for better performance
+  method: "GET" # Use GET for better user experience
   default_http_headers:
     X-Content-Type-Options: nosniff
     X-Download-Options: noopen
