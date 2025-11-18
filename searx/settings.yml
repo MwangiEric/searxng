@@ -49,10 +49,6 @@ server:
     X-Robots-Tag: noindex, nofollow
     Referrer-Policy: no-referrer
 
-valkey:
-  # URL to connect valkey database. Is overwritten by ${SEARXNG_VALKEY_URL}.
-  url: valkey://https://searxng-587s.onrender.com:6379/0
-
 ui:
   static_path: ""
   templates_path: ""
