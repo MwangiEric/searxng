@@ -16,6 +16,90 @@ brand:
   wiki_url: https://github.com/searxng/searxng/wiki
   issue_url: https://github.com/searxng/searxng/issues
 
+engines:
+  # === General Web ===
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: d
+  - name: bing
+    engine: bing
+    shortcut: b
+
+  # === Music & Audio ===
+  - name: mixcloud
+    engine: mixcloud
+    shortcut: mx
+  - name: soundcloud
+    engine: soundcloud
+    shortcut: sc
+  - name: bandcamp
+    engine: bandcamp
+    shortcut: bc
+
+  # === Video ===
+  - name: youtube
+    engine: youtube
+    shortcut: yt
+  - name: peer tube
+    engine: peertube
+    shortcut: pt
+
+  # === Images ===
+  - name: flickr
+    engine: flickr
+    shortcut: fl
+  - name: unsplash
+    engine: unsplash
+    shortcut: us
+
+  # === News ===
+  - name: newslookup
+    engine: newslookup
+    shortcut: nl
+
+  # === Tech / Dev ===
+  - name: stackoverflow
+    engine: stackoverflow
+    shortcut: so
+  - name: github
+    engine: github
+    shortcut: gh
+  - name: gitlab
+    engine: gitlab
+    shortcut: gl
+
+  # === Academic / Science ===
+  - name: arxiv
+    engine: arxiv
+    shortcut: ax
+  - name: pubmed
+    engine: pubmed
+    shortcut: pm
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: w
+
+  # === Shopping ===
+  - name: amazon
+    engine: amazon
+    shortcut: amz
+  - name: ebay
+    engine: ebay
+    shortcut: eb
+
+  # === Maps & Places ===
+  - name: openstreetmap
+    engine: openstreetmap
+    shortcut: osm
+
+  # === Utilities ===
+  - name: currency
+    engine: currency_convert
+    shortcut: cur
+  - name: time
+    engine: time
+    shortcut: time
+
 search:
   safe_search: 0 # No filtering
   autocomplete: "duckduckgo" # Enable a more reliable autocomplete source
