@@ -1,5 +1,9 @@
 use_default_settings: true
 
+.tests_infobox: &tests_infobox  []
+.test_rosebud: &test_rosebud  []
+
+
 general:
   debug: false
   instance_name: "StillMind"
@@ -54,7 +58,7 @@ engines:
     content_xpath: //div[@class="TEXT-BLOCK"]/ul/li
     categories: general
     timeout: 7.0
-    disabled: true
+    disabled: false
     shortcut: ai
     soft_max_redirects: 1
     about:
@@ -94,7 +98,7 @@ engines:
   - name: bing
     engine: bing
     shortcut: bi
-    disabled: true
+    disabled: false
 
   - name: bing images
     engine: bing_images
@@ -187,7 +191,7 @@ engines:
     engine: json_engine
     shortcut: yep
     categories: general
-    disabled: true
+    disabled: false
     paging: false
     page_size: 10
     content_html_to_text: true
