@@ -68,6 +68,346 @@ engines:
     timeout: 10.0
     disabled: false
 
+###############################################################################
+#  ROYALTY-FREE STOCK MEDIA (no API key) – 11 engines
+#  Licence summary:
+#  - CC0 / no attribution:  Pexels, Pixabay, Unsplash, StockSnap, Kaboompics, Reshot, Burst, FreeImages
+#  - Public-domain / check per file:  Wikimedia Commons
+#  - Free licence / no re-sell raw file:  Kaboompics, StockVault
+###############################################################################
+
+engines:
+
+  # 1.  Pexels (photos + videos, CC0)
+  - name: pexels
+    engine: xpath
+    shortcut: px
+    categories: [images, videos]
+    paging: true
+    first_page_num: 1
+    page_size: 30
+    search_url: https://www.pexels.com/search/{query}/?page={pageno}
+    results_xpath: //article[@data-testid='photo-grid-item']//a[1]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 2.  Pixabay (photos + videos, CC0)
+  - name: pixabay
+    engine: xpath
+    shortcut: pxb
+    categories: [images, videos]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://pixabay.com/images/search/{query}/?pagi={pageno}
+    results_xpath: //div[contains(@class,'item')]
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    content_xpath: .//img/@src
+    thumbnail_xpath: .//img/@src
+    disabled: false
+
+  # 3.  Unsplash (photos only, CC0)
+  - name: unsplash
+    engine: xpath
+    shortcut: up
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://unsplash.com/s/photos/{query}?page={pageno}
+    results_xpath: //figure//a[contains(@href,'/photos/')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 4.  StockSnap.io (photos, CC0)
+  - name: stocksnap
+    engine: xpath
+    shortcut: ss
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://stocksnap.io/search/{query}?page={pageno}
+    results_xpath: //a[contains(@class,'photo-grid-item')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 5.  Kaboompics (photos, free licence, no re-sell raw file)
+  - name: kaboompics
+    engine: xpath
+    shortcut: kab
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 15
+    search_url: https://kaboompics.com/search?search={query}&page={pageno}
+    results_xpath: //div[contains(@class,'photo')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 6.  Reshot (photos + icons/illustrations, CC0)
+  - name: reshot
+    engine: xpath
+    shortcut: rh
+    categories: [images, icons]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.reshot.com/search/{query}?page={pageno}
+    results_xpath: //a[contains(@class,'grid-item')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 7.  Burst by Shopify (photos, CC0)
+  - name: burst
+    engine: xpath
+    shortcut: bs
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://burst.shopify.com/search?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'grid-item')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 8.  FreeImages (photos, free licence ≈ CC0)
+  - name: freeimages
+    engine: xpath
+    shortcut: fi
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.freeimages.com/search/{query}?page={pageno}
+    results_xpath: //div[contains(@class,'grid-item')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 9.  StockVault (photos + textures, free licence)
+  - name: stockvault
+    engine: xpath
+    shortcut: sv
+    categories: [images, textures]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.stockvault.net/search?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'item')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 10.  Wikimedia Commons (public-domain / CC-BY, check per file)
+  - name: wikimedia-commons
+    engine: xpath
+    shortcut: wc
+    categories: [images, videos, educational]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://commons.wikimedia.org/w/index.php?search={query}&page={pageno}
+    results_xpath: //li[contains(@class,'searchResult')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+###############################################################################
+#  ROYALTY-FREE STOCK MEDIA (no API key) – 11 engines
+#  Licence summary:
+#  - CC0 / no attribution:  Pexels, Pixabay, Unsplash, StockSnap, Kaboompics, Reshot, Burst, FreeImages
+#  - Public-domain / check per file:  Wikimedia Commons
+#  - Free licence / no re-sell raw file:  Kaboompics, StockVault
+###############################################################################
+
+engines:
+
+  # 1.  Pexels (photos + videos, CC0)
+  - name: pexels
+    engine: xpath
+    shortcut: px
+    categories: [images, videos]
+    paging: true
+    first_page_num: 1
+    page_size: 30
+    search_url: https://www.pexels.com/search/{query}/?page={pageno}
+    results_xpath: //article[@data-testid='photo-grid-item']//a[1]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 2.  Pixabay (photos + videos, CC0)
+  - name: pixabay
+    engine: xpath
+    shortcut: pxb
+    categories: [images, videos]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://pixabay.com/images/search/{query}/?pagi={pageno}
+    results_xpath: //div[contains(@class,'item')]
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    content_xpath: .//img/@src
+    thumbnail_xpath: .//img/@src
+    disabled: false
+
+  # 3.  Unsplash (photos only, CC0)
+  - name: unsplash
+    engine: xpath
+    shortcut: up
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://unsplash.com/s/photos/{query}?page={pageno}
+    results_xpath: //figure//a[contains(@href,'/photos/')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 4.  StockSnap.io (photos, CC0)
+  - name: stocksnap
+    engine: xpath
+    shortcut: ss
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://stocksnap.io/search/{query}?page={pageno}
+    results_xpath: //a[contains(@class,'photo-grid-item')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 5.  Kaboompics (photos, free licence, no re-sell raw file)
+  - name: kaboompics
+    engine: xpath
+    shortcut: kab
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 15
+    search_url: https://kaboompics.com/search?search={query}&page={pageno}
+    results_xpath: //div[contains(@class,'photo')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 6.  Reshot (photos + icons/illustrations, CC0)
+  - name: reshot
+    engine: xpath
+    shortcut: rh
+    categories: [images, icons]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.reshot.com/search/{query}?page={pageno}
+    results_xpath: //a[contains(@class,'grid-item')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 7.  Burst by Shopify (photos, CC0)
+  - name: burst
+    engine: xpath
+    shortcut: bs
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://burst.shopify.com/search?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'grid-item')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 8.  FreeImages (photos, free licence ≈ CC0)
+  - name: freeimages
+    engine: xpath
+    shortcut: fi
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.freeimages.com/search/{query}?page={pageno}
+    results_xpath: //div[contains(@class,'grid-item')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 9.  StockVault (photos + textures, free licence)
+  - name: stockvault
+    engine: xpath
+    shortcut: sv
+    categories: [images, textures]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.stockvault.net/search?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'item')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
+  # 10.  Wikimedia Commons (public-domain / CC-BY, check per file)
+  - name: wikimedia-commons
+    engine: xpath
+    shortcut: wc
+    categories: [images, videos, educational]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://commons.wikimedia.org/w/index.php?search={query}&page={pageno}
+    results_xpath: //li[contains(@class,'searchResult')]//a[img]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    disabled: false
+
   - name: apk mirror
     engine: apkmirror
     timeout: 4.0
