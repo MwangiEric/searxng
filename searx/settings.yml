@@ -33,6 +33,41 @@ categories_as_tabs:
   social media:
 
 engines:
+
+#######################################################################
+#  1.  Reddit  –  public RSS, no token
+#######################################################################
+  - name: reddit-rss
+    engine: xpath
+    shortcut: rd
+    categories: [news, social media]
+    paging: false                # Reddit RSS is single-page
+    search_url: https://www.reddit.com/r/{query}/.rss
+    results_xpath: //entry
+    url_xpath: ./link/@href
+    title_xpath: ./title
+    content_xpath: ./summary
+    timeout: 8.0
+    disabled: false
+
+#######################################################################
+#  2.  Telegram public channel – scrape web preview
+#######################################################################
+  - name: telegram-channel
+    engine: xpath
+    shortcut: tg
+    categories: [news, social media]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://t.me/s/{query}?before={pageno}
+    results_xpath: //div[@class="tgme_widget_message_wrap"]
+    url_xpath: .//a[@class="tgme_widget_message_date"]/@href
+    title_xpath: .//div[@class="tgme_widget_message_text"]
+    content_xpath: .//div[@class="tgme_widget_message_text"]
+    timeout: 10.0
+    disabled: false
+
   - name: apk mirror
     engine: apkmirror
     timeout: 4.0
