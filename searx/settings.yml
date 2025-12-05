@@ -110,22 +110,6 @@ engines:
     thumbnail_xpath: .//img/@src
     disabled: false
 
-  # 3.  Unsplash (photos only, CC0)
-  - name: unsplash-photos
-    engine: xpath
-    shortcut: up
-    categories: [images]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://unsplash.com/s/photos/{query}?page={pageno}
-    results_xpath: //figure//a[contains(@href,'/photos/')]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    disabled: false
-
   # 4.  StockSnap.io (photos, CC0)
   - name: stocksnap
     engine: xpath
@@ -281,7 +265,7 @@ engines:
     disabled: false
 
   # 3.  Unsplash (photos only, CC0)
-  - name: unsplash
+  - name: unsplash-photos
     engine: xpath
     shortcut: up
     categories: [images]
