@@ -460,7 +460,7 @@ engines:
     categories: [it, repos]
     shortcut: gl
     timeout: 10.0
-    disabled: true
+    disabled: false
     about:
       website: https://about.gitlab.com/
       wikidata_id: Q16639197
@@ -1123,7 +1123,7 @@ engines:
     engine: startpage
     shortcut: sp
     timeout: 6.0
-    disabled: true
+    disabled: false
     additional_tests:
       rosebud: *test_rosebud
 
@@ -1216,7 +1216,7 @@ engines:
   - name: yahoo
     engine: yahoo
     shortcut: yh
-    disabled:false
+    disabled: false
 
   - name: yahoo news
     engine: yahoo_news
