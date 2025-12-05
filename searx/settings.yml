@@ -111,7 +111,7 @@ engines:
     disabled: false
 
   # 3.  Unsplash (photos only, CC0)
-  - name: unsplash
+  - name: unsplash-photos
     engine: xpath
     shortcut: up
     categories: [images]
@@ -685,12 +685,6 @@ engines:
     engine: duckduckgo
     shortcut: ddg
 
-  - name: duckduckgo images
-    engine: duckduckgo_images
-    shortcut: ddi
-    timeout: 3.0
-    disabled: true
-
   - name: tineye
     engine: tineye
     shortcut: tin
@@ -776,18 +770,6 @@ engines:
   - name: genius
     engine: genius
     shortcut: gen
-
-  - name: gigablast
-    engine: gigablast
-    shortcut: gb
-    timeout: 4.0
-    disabled: true
-    additional_tests:
-      rosebud: *test_rosebud
-
-  - name: gentoo
-    engine: gentoo
-    shortcut: ge
 
   - name: gitlab
     engine: json_engine
@@ -880,11 +862,6 @@ engines:
   - name: google scholar
     engine: google_scholar
     shortcut: gos
-
-  - name: google play apps
-    engine: google_play_apps
-    shortcut: gpa
-    disabled: true
 
   - name: google play movies
     engine: xpath
@@ -1308,35 +1285,6 @@ engines:
       use_official_api: false
       require_api_key: false
       results: HTML
-
-  - name: qwant
-    engine: qwant
-    shortcut: qw
-    categories: [general, web]
-    disabled: false
-    additional_tests:
-      rosebud: *test_rosebud
-
-  - name: qwant news
-    engine: qwant
-    shortcut: qwn
-    categories: news
-    disabled: false
-    network: qwant
-
-  - name: qwant images
-    engine: qwant
-    shortcut: qwi
-    categories: [images, web]
-    disabled: false
-    network: qwant
-
-  - name: qwant videos
-    engine: qwant
-    shortcut: qwv
-    categories: [videos, web]
-    disabled: false
-    network: qwant
 
   # - name: library
   #   engine: recoll
