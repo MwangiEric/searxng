@@ -1950,8 +1950,8 @@ outgoing:
   pool_maxsize: 20
   enable_http2: true
   proxies:
-    http: http://${WEB_SHARE_USER}:${WEB_SHARE_PASS}@p.webshare.io:80
-    https: http://${WEB_SHARE_USER}:${WEB_SHARE_PASS}@p.webshare.io:80
+    http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
+    https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
 
 plugins:
   searx.plugins.calculator.SXNGPlugin:
