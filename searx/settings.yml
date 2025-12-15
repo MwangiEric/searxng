@@ -32,6 +32,7 @@ categories_as_tabs:
   files:
   social media:
 
+
 engines:
 
 #######################################################################
@@ -67,16 +68,6 @@ engines:
     content_xpath: .//div[@class="tgme_widget_message_text"]
     timeout: 10.0
     disabled: false
-
-###############################################################################
-#  ROYALTY-FREE STOCK MEDIA (no API key) – 11 engines
-#  Licence summary:
-#  - CC0 / no attribution:  Pexels, Pixabay, Unsplash, StockSnap, Kaboompics, Reshot, Burst, FreeImages
-#  - Public-domain / check per file:  Wikimedia Commons
-#  - Free licence / no re-sell raw file:  Kaboompics, StockVault
-###############################################################################
-
-engines:
 
   # 1.  Pexels (photos + videos, CC0)
   - name: pexels
@@ -550,7 +541,7 @@ engines:
     engine: json_engine
     shortcut: yep
     categories: general
-    disabled: false
+    disabled: true
     paging: false
     page_size: 10
     content_html_to_text: true
@@ -664,6 +655,7 @@ engines:
     timeout: 3.0
     weight: 2
     tests: *tests_infobox
+    disabled: true
 
   - name: duckduckgo
     engine: duckduckgo
@@ -1944,7 +1936,7 @@ ui:
   url_formatting: pretty
 
 outgoing:
-  request_timeout: 7.0
+  request_timeout: 12.0
   useragent_suffix: ""
   pool_connections: 100
   pool_maxsize: 20
