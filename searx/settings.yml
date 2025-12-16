@@ -17,28 +17,6 @@ outgoing:
   proxies:
     http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
     https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
-# SearXNG settings – complete engine list June 2025
-use_default_settings: true
-
-general:
-  debug: false
-  instance_name: "SearXNG"
-
-search:
-  safe_search: 2
-  autocomplete: 'duckduckgo'
-  formats:
-    - html
-    - json
-
-server:
-  secret_key: "ultrasecretkey"
-  limiter: true
-  image_proxy: true
-
-valkey:
-  url: valkey://localhost:6379/0
-
 categories_as_tabs:
   general:
   images:
@@ -191,20 +169,12 @@ engines:
     engine: google
     shortcut: go
     categories: [general]
-    disabled: true          # ← CF hell; use Whoogle instead
+    disabled: true
 
   - name: brave
-    engine: xpath
+    engine: brave
     shortcut: brave
     categories: [general]
-    paging: true
-    first_page_num: 0
-    search_url: https://search.brave.com/search?q={query}&offset={pageno}
-    url_xpath: //a[@class="result-header"]/@href
-    title_xpath: //span[@class="snippet-title"]
-    content_xpath: //p[1][@class="snippet-description"]
-    timeout: 8.0
-    disabled: true          # ← CF heavy; keep off unless proxied
 
   - name: kagi
     engine: json_engine
@@ -219,7 +189,7 @@ engines:
     title_query: title
     content_query: snippet
     timeout: 8.0
-    disabled: true          # ← needs paid key
+    disabled: true
 
 # ------------------------------------------------------------- #
 #  KENYAN  –  news, cars, real-estate, furniture, household
@@ -1116,7 +1086,7 @@ engines:
     content_xpath: ./td[2]/small
     enable_http: true
     timeout: 30.0
-    disabled: false
+    disabled: true
 
 # ------------------------------------------------------------- #
 #  SOCIAL / NEWS  –  Reddit, X, LinkedIn, Yahoo, Naver
@@ -1143,24 +1113,6 @@ engines:
     timeout: 8.0
     disabled: false
 
-  - name: naver
-    engine: json_engine
-    shortcut: nvr
-    categories: [news, blogs, korea]
-    paging: true
-    first_page_num: 1
-    page_size: 10
-    search_url: https://openapi.naver.com/v1/search/blog.json?query={query}&start={pageno}
-    headers:
-      X-Naver-Client-Id: 'dummy'
-    results_query: items
-    url_query: link
-    title_query: title
-    content_query: description
-    thumbnail_query: thumbnail
-    timeout: 8.0
-    disabled: false
-
   - name: linkedin-public
     engine: xpath
     shortcut: li
@@ -1180,13 +1132,6 @@ engines:
 # ------------------------------------------------------------- #
 #  CHINESE  –  Bing-CN, WeChat, Bilibili, Youku
 # ------------------------------------------------------------- #
-  - name: bing-china
-    engine: bing
-    shortcut: bc
-    categories: [general, web]
-    language: zh-CN
-    base_url: 'https://cn.bing.com'
-    disabled: false
 
   - name: sogou-wechat
     engine: xpath
@@ -1216,7 +1161,7 @@ engines:
     title_query: title
     content_query: description
     timeout: 8.0
-    disabled: false
+    disabled: true
 
   - name: youku
     engine: xpath
@@ -1253,23 +1198,7 @@ engines:
 
 # ------------------------------------------------------------- #
 #  YANKEES  –  TikTok, LinkedIn, Yahoo, Reddit
-# ------------------------------------------------------------- #
-  - name: tiktok
-    engine: json_engine
-    shortcut: tt
-    categories: [videos, social]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.tiktok.com/api/search/general/full/?keyword={query}&offset={pageno}
-    results_query: data
-    url_query: item.url
-    title_query: item.desc
-    content_query: item.desc
-    thumbnail_query: item.cover
-    timeout: 8.0
-    disabled: false
-
+# ------------------------------------------------------------- 
   - name: reddit
     engine: reddit
     shortcut: re
