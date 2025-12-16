@@ -1124,24 +1124,6 @@ engines:
     timeout: 8.0
     disabled: false
 
-  - name: naver
-    engine: json_engine
-    shortcut: nvr
-    categories: [news, blogs, korea]
-    paging: true
-    first_page_num: 1
-    page_size: 10
-    search_url: https://openapi.naver.com/v1/search/blog.json?query={query}&start={pageno}
-    headers:
-      X-Naver-Client-Id: 'dummy'
-    results_query: items
-    url_query: link
-    title_query: title
-    content_query: description
-    thumbnail_query: thumbnail
-    timeout: 8.0
-    disabled: false
-
   - name: linkedin-public
     engine: xpath
     shortcut: li
