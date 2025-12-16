@@ -175,17 +175,9 @@ engines:
     disabled: true          # ← CF hell; use Whoogle instead
 
   - name: brave
-    engine: xpath
+    engine: brave
     shortcut: brave
     categories: [general]
-    paging: true
-    first_page_num: 0
-    search_url: https://search.brave.com/search?q={query}&offset={pageno}
-    url_xpath: //a[@class="result-header"]/@href
-    title_xpath: //span[@class="snippet-title"]
-    content_xpath: //p[1][@class="snippet-description"]
-    timeout: 8.0
-    disabled: true          # ← CF heavy; keep off unless proxied
 
   - name: kagi
     engine: json_engine
