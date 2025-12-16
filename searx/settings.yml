@@ -172,7 +172,7 @@ engines:
     engine: google
     shortcut: go
     categories: [general]
-    disabled: true          # ← CF hell; use Whoogle instead
+    disabled: true
 
   - name: brave
     engine: brave
@@ -192,7 +192,7 @@ engines:
     title_query: title
     content_query: snippet
     timeout: 8.0
-    disabled: true          # ← needs paid key
+    disabled: true
 
 # ------------------------------------------------------------- #
 #  KENYAN  –  news, cars, real-estate, furniture, household
