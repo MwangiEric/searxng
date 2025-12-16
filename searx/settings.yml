@@ -1,17 +1,5 @@
 use_default_settings: true
 
-categories_as_tabs:
-  general:
-  images:
-  news:
-  it:
-  science:
-  social media:
-  kenya:          # ← Your custom tab
-  design:         # ← Your custom tab
-  ai:             # ← Your custom tab
-  python:         # ← Your custom tab
-
 search:
   safe_search: 2
   autocomplete: "duckduckgo"
