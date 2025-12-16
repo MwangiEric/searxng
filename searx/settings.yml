@@ -1097,7 +1097,7 @@ engines:
     content_xpath: ./td[2]/small
     enable_http: true
     timeout: 30.0
-    disabled: false
+    disabled: true
 
 # ------------------------------------------------------------- #
 #  SOCIAL / NEWS  –  Reddit, X, LinkedIn, Yahoo, Naver
@@ -1161,13 +1161,6 @@ engines:
 # ------------------------------------------------------------- #
 #  CHINESE  –  Bing-CN, WeChat, Bilibili, Youku
 # ------------------------------------------------------------- #
-  - name: bing-china
-    engine: bing
-    shortcut: bc
-    categories: [general, web]
-    language: zh-CN
-    base_url: 'https://cn.bing.com'
-    disabled: false
 
   - name: sogou-wechat
     engine: xpath
@@ -1197,7 +1190,7 @@ engines:
     title_query: title
     content_query: description
     timeout: 8.0
-    disabled: false
+    disabled: true
 
   - name: youku
     engine: xpath
@@ -1234,23 +1227,7 @@ engines:
 
 # ------------------------------------------------------------- #
 #  YANKEES  –  TikTok, LinkedIn, Yahoo, Reddit
-# ------------------------------------------------------------- #
-  - name: tiktok
-    engine: json_engine
-    shortcut: tt
-    categories: [videos, social]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.tiktok.com/api/search/general/full/?keyword={query}&offset={pageno}
-    results_query: data
-    url_query: item.url
-    title_query: item.desc
-    content_query: item.desc
-    thumbnail_query: item.cover
-    timeout: 8.0
-    disabled: false
-
+# ------------------------------------------------------------- 
   - name: reddit
     engine: reddit
     shortcut: re
