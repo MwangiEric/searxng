@@ -1,25 +1,34 @@
-# SearXNG settings – complete engine list June 2025
 use_default_settings: true
 
-general:
-  debug: false
-  instance_name: "SearXNG"
+categories_as_tabs:
+  general:
+  images:
+  news:
+  it:
+  science:
+  social media:
+  kenya:          # ← Your custom tab
+  design:         # ← Your custom tab
+  ai:             # ← Your custom tab
+  python:         # ← Your custom tab
 
 search:
   safe_search: 2
-  autocomplete: 'duckduckgo'
+  autocomplete: "duckduckgo"
   formats:
     - html
     - json
 
 server:
-  secret_key: "ultrasecretkey"
-  limiter: true
+  secret_key: "CHANGE_ME"
+  public_instance: false
   image_proxy: true
 
-valkey:
-  url: valkey://localhost:6379/0
-
+outgoing:
+  request_timeout: 12.0
+  proxies:
+    http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
+    https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
 categories_as_tabs:
   general:
   images:
