@@ -117,6 +117,37 @@ engines:
     thumbnail_xpath: ./img/@src
     disabled: false
 
+    #################################################################
+#  Top 5 XPath image engines – CF-free, no API key, CC-0
+#################################################################
+
+  # 1. Pixabay – photos + videos, CC-0
+  - name: pixabay
+    engine: xpath
+    shortcut: pxb
+    categories: [images, videos]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://pixabay.com/images/search/{query}/?pagi={pageno}
+    results_xpath: //div[@data-testid="item"]
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    content_xpath: .//img/@src
+    thumbnail_xpath: .//img/@src
+    timeout: 8.0
+    disabled: false
+
+  # 2. StockSnap.io – photos, CC-0
+  - name: stocksnap
+    engine: xpath
+    shortcut: ss
+    categories: [images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://stocksnap.io/search/{query}?page={pagen
+
   # 5.  Kaboompics (photos, free licence, no re-sell raw file)
   - name: kaboompics
     engine: xpath
