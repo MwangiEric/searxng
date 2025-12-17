@@ -1,3 +1,4 @@
+#  SearXNG – clean, combined, crash-free  (June 2025)
 use_default_settings: true
 
 search:
@@ -16,30 +17,37 @@ server:
 
 outgoing:
   request_timeout: 12.0
-  proxies:
-    http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
-    https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
+  # Uncomment if you have a proxy
+  # proxies:
+  #   http: "http://user:pass@host:port"
+  #   https: "http://user:pass@host:port"
+
 categories_as_tabs:
   general:
   images:
   news:
+  videos:
+  music:
+  files:
   it:
   science:
   social media:
+  maps:
+  onions:
   kenya:          # 🇰🇪 Kenyan content
   design:         # 🎨 Assets & mock-ups
   ai:             # 🤖 Models / datasets
   python:         # 🐍 PyPI / docs
   torrents:       # 🧲 Magnets
-  videos:         # 📺 Clips & movies
+  shopping:       # 🛒 Global & KE shops
 
 #################################################################
-#  COMPLETE ENGINE LIST – keyless, scrape-friendly, June 2025
+#  CRASH-FREE ENGINE LIST – keyless, CF-light, June 2025
 #################################################################
 engines:
 
 # ------------------------------------------------------------- #
-#  GLOBAL GENERAL (appear in 'general' tab)
+#  GLOBAL GENERAL (no CF, no key)
 # ------------------------------------------------------------- #
   - name: bing
     engine: bing
@@ -53,10 +61,19 @@ engines:
     categories: [general]
     disabled: false
 
-  - name: startpage
-    engine: startpage
-    shortcut: sp
+  - name: baidu
+    engine: json_engine
+    shortcut: bd
     categories: [general]
+    paging: true
+    first_page_num: 0
+    page_size: 10
+    search_url: "https://www.baidu.com/s?wd={query}&pn={pageno}"
+    results_query: feed/entry
+    url_query: url
+    title_query: title
+    content_query: abs
+    timeout: 8.0
     disabled: false
 
   - name: ecosia
@@ -66,7 +83,7 @@ engines:
     paging: true
     first_page_num: 0
     page_size: 10
-    search_url: https://www.ecosia.org/search?q={query}&p={pageno}
+    search_url: "https://www.ecosia.org/search?q={query}&p={pageno}"
     results_xpath: //div[@data-test-id='mainline']//article
     url_xpath: .//h2/a/@href
     title_xpath: .//h2/a
@@ -81,7 +98,7 @@ engines:
     paging: true
     first_page_num: 0
     page_size: 10
-    search_url: https://whoogle.dcs0.hu/search?q={query}&start={pageno}
+    search_url: "https://whoogle.dcs0.hu/search?q={query}&start={pageno}"
     results_xpath: //div[@class='g']
     url_xpath: .//h3/a/@href
     title_xpath: .//h3/a
@@ -96,7 +113,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 10
-    search_url: https://metager.org/meta/meta.ger3?eingabe={query}&page={pageno}
+    search_url: "https://metager.org/meta/meta.ger3?eingabe={query}&page={pageno}"
     results_xpath: //div[@class='result-item']
     url_xpath: .//h4/a/@href
     title_xpath: .//h4/a
@@ -111,7 +128,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 10
-    search_url: https://www.qwant.com/?q={query}&p={pageno}
+    search_url: "https://www.qwant.com/?q={query}&p={pageno}"
     results_xpath: //div[@data-testid='result-item']
     url_xpath: .//h3/a/@href
     title_xpath: .//h3/a
@@ -126,26 +143,11 @@ engines:
     paging: true
     first_page_num: 0
     page_size: 10
-    search_url: https://yandex.ru/search/?text={query}&p={pageno}
+    search_url: "https://yandex.ru/search/?text={query}&p={pageno}"
     results_xpath: //li[contains(@class,'serp-item')]
     url_xpath: .//h2/a/@href
     title_xpath: .//h2/a
     content_xpath: .//div[contains(@class,'text-container')]
-    timeout: 8.0
-    disabled: false
-
-  - name: baidu
-    engine: json_engine
-    shortcut: bd
-    categories: [general]
-    paging: true
-    first_page_num: 0
-    page_size: 10
-    search_url: https://www.baidu.com/s?wd={query}&pn={pageno}
-    results_query: feed/entry
-    url_query: url
-    title_query: title
-    content_query: abs
     timeout: 8.0
     disabled: false
 
@@ -156,7 +158,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 10
-    search_url: https://www.sogou.com/web?query={query}&page={pageno}
+    search_url: "https://www.sogou.com/web?query={query}&page={pageno}"
     results_xpath: //div[@class='vrwrap']
     url_xpath: .//h3/a/@href
     title_xpath: .//h3/a
@@ -164,26 +166,33 @@ engines:
     timeout: 8.0
     disabled: false
 
-#  ------------------------------------------------------------- #
-#  HIGH-CF ENGINES – disabled by default (enable only if you add FlareSolverr)
-#  ------------------------------------------------------------- #
+# ------------------------------------------------------------- #
+#  DISABLED HIGH-CF / KEY ENGINES
+# ------------------------------------------------------------- #
   - name: google
     engine: google
     shortcut: go
     categories: [general]
     disabled: true
 
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+    categories: [general]
+    disabled: true          # JSON decode error
+
   - name: brave
     engine: brave
     shortcut: brave
     categories: [general]
+    disabled: true
 
   - name: kagi
     engine: json_engine
     shortcut: kagi
     categories: [general]
     paging: true
-    search_url: https://kagi.com/api/v0/search?q={query}&offset={pageno}
+    search_url: "https://kagi.com/api/v0/search?q={query}&offset={pageno}"
     headers:
       Authorization: 'Bot {{ getenv "KAGI_API_KEY" }}'
     results_query: data
@@ -194,7 +203,7 @@ engines:
     disabled: true
 
 # ------------------------------------------------------------- #
-#  KENYAN  –  news, cars, real-estate, furniture, household
+#  KENYAN  –  news, cars, real-estate, shopping
 # ------------------------------------------------------------- #
   - name: tuko-news
     engine: xpath
@@ -203,75 +212,11 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://www.tuko.co.ke/search/?q={query}&page={pageno}
+    search_url: "https://www.tuko.co.ke/search/?q={query}&page={pageno}"
     results_xpath: //article[contains(@class,'search-item')]
     url_xpath: .//a/@href
     title_xpath: .//h3/a
     content_xpath: .//p
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: magari-cars
-    engine: xpath
-    shortcut: magc
-    categories: [kenya, cars]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.magarideals.com/search?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'car-card')]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//span[@class='price']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: kpc-real-estate
-    engine: xpath
-    shortcut: kpc
-    categories: [kenya, real-estate]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://kenyapropertycentre.com/for-sale/houses?keywords={query}&page={pageno}
-    results_xpath: //div[contains(@class,'listings-card')]
-    url_xpath: .//a/@href
-    title_xpath: .//h5
-    content_xpath: .//p[@class='price']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: moko-furniture
-    engine: xpath
-    shortcut: moko
-    categories: [kenya, furniture, household, kitchen]
-    paging: true
-    first_page_num: 1
-    page_size: 16
-    search_url: https://mokohome.com/search?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'product-card')]
-    url_xpath: .//a/@href
-    title_xpath: .//h4
-    content_xpath: .//span[@class='price']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: mbo-household
-    engine: xpath
-    shortcut: mboh
-    categories: [kenya, household, kitchen]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://mybigorder.com/search?q={query}&category=household-kitchen&page={pageno}
-    results_xpath: //div[contains(@class,'product-box')]
-    url_xpath: .//a/@href
-    title_xpath: .//h5
-    content_xpath: .//span[@class='current-price']
     thumbnail_xpath: .//img/@src
     timeout: 8.0
     disabled: false
@@ -283,7 +228,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 24
-    search_url: https://www.jumia.co.ke/catalog/?q={query}&page={pageno}
+    search_url: "https://www.jumia.co.ke/catalog/?q={query}&page={pageno}"
     results_xpath: //a[contains(@class,'core')]
     url_xpath: ./@href
     title_xpath: .//h3
@@ -299,7 +244,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 30
-    search_url: https://jiji.co.ke/search?query={query}&page={pageno}
+    search_url: "https://jiji.co.ke/search?query={query}&page={pageno}"
     results_xpath: //div[@data-testid='listing-card']
     url_xpath: .//a/@href
     title_xpath: .//h3
@@ -308,91 +253,8 @@ engines:
     timeout: 8.0
     disabled: false
 
-  - name: kilimall-ke
-    engine: xpath
-    shortcut: klmke
-    categories: [kenya, ecommerce]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.kilimall.co.ke/new/commodity/search?keyword={query}&page={pageno}
-    results_xpath: //div[@class='product-item']
-    url_xpath: .//a/@href
-    title_xpath: .//p[@class='product-title']
-    content_xpath: .//p[@class='product-price']
-    thumbnail_xpath: .//img/@data-original
-    timeout: 8.0
-    disabled: false
-
-  - name: mybigorder-ke
-    engine: xpath
-    shortcut: mbo
-    categories: [kenya, ecommerce]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://mybigorder.com/search?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'product-card')]
-    url_xpath: .//a/@href
-    title_xpath: .//h5
-    content_xpath: .//span[@class='price']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
 # ------------------------------------------------------------- #
-#  GLOBAL ECOMMERCE  –  Amazon, eBay, AliExpress
-# ------------------------------------------------------------- #
-  - name: amazon-global
-    engine: xpath
-    shortcut: amz
-    categories: [ecommerce, global]
-    paging: true
-    first_page_num: 1
-    page_size: 16
-    search_url: https://www.amazon.com/s?k={query}&page={pageno}
-    results_xpath: //div[@data-component-type='s-search-result']
-    url_xpath: .//h2/a/@href
-    title_xpath: .//h2/a/span
-    content_xpath: .//span[@class='a-price-whole']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: ebay-global
-    engine: xpath
-    shortcut: ebay
-    categories: [ecommerce, global]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.ebay.com/sch/i.html?_nkw={query}&_pgn={pageno}
-    results_xpath: //li[contains(@class,'s-item')]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//span[@class='s-item__price']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: aliexpress-global
-    engine: xpath
-    shortcut: ali
-    categories: [ecommerce, global]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.aliexpress.com/wholesale?SearchText={query}&page={pageno}
-    results_xpath: //a[contains(@class,'manhattan')]
-    url_xpath: ./@href
-    title_xpath: .//h3
-    content_xpath: .//span[@class='price-current']
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-# ------------------------------------------------------------- #
-#  DESIGN ASSETS  –  icons, vectors, mock-ups, fonts, illustrations
+#  DESIGN ASSETS  –  icons, vectors, mock-ups, fonts
 # ------------------------------------------------------------- #
   - name: iconfinder
     engine: xpath
@@ -401,7 +263,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://www.iconfinder.com/search/?q={query}&price=free&page={pageno}
+    search_url: "https://www.iconfinder.com/search/?q={query}&price=free&page={pageno}"
     results_xpath: //div[@data-testid='icon-grid-item']
     url_xpath: .//a/@href
     title_xpath: .//img/@alt
@@ -417,7 +279,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 30
-    search_url: https://www.svgrepo.com/vectors/{query}/?page={pageno}
+    search_url: "https://www.svgrepo.com/vectors/{query}/?page={pageno}"
     results_xpath: //a[contains(@class,'vector-item')]
     url_xpath: ./@href
     title_xpath: ./@title
@@ -431,7 +293,7 @@ engines:
     shortcut: ud
     categories: [design, illustrations]
     paging: false
-    search_url: https://undraw.co/illustrations
+    search_url: "https://undraw.co/illustrations"
     results_xpath: //div[contains(@class,'illustration')]//a[contains(@href,'/illustrations/')]
     url_xpath: ./@href
     title_xpath: .//p
@@ -440,44 +302,12 @@ engines:
     timeout: 6.0
     disabled: false
 
-  - name: mockupworld
-    engine: xpath
-    shortcut: muw
-    categories: [design, mock-ups]
-    paging: true
-    first_page_num: 1
-    page_size: 12
-    search_url: https://mockupworld.co/page/{pageno}/?s={query}
-    results_xpath: //article[contains(@class,'post')]
-    url_xpath: .//a/@href
-    title_xpath: .//h2/a
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: freebiesbug
-    engine: xpath
-    shortcut: fb
-    categories: [design, psd, figma, fonts]
-    paging: true
-    first_page_num: 1
-    page_size: 10
-    search_url: https://freebiesbug.com/search?q={query}&page={pageno}
-    results_xpath: //article[contains(@class,'type-post')]
-    url_xpath: .//h2/a/@href
-    title_xpath: .//h2/a
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
   - name: openmoji
     engine: xpath
     shortcut: emj
     categories: [design, icons]
     paging: false
-    search_url: https://openmoji.org/library/?search={query}
+    search_url: "https://openmoji.org/library/?search={query}"
     results_xpath: //a[contains(@class,'library-grid-item')]
     url_xpath: ./@href
     title_xpath: ./@title
@@ -486,86 +316,8 @@ engines:
     timeout: 6.0
     disabled: false
 
-  - name: storyset
-    engine: xpath
-    shortcut: stv
-    categories: [design, illustrations]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://storyset.com/search/{query}/{pageno}'
-    results_xpath: //article[contains(@class,'story')]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: blush
-    engine: xpath
-    shortcut: blu
-    categories: [design, illustrations]
-    paging: true
-    first_page_num: 1
-    page_size: 12
-    search_url: https://blush.design/search?q={query}&page={pageno}
-    results_xpath: //a[contains(@class,'asset-card')]
-    url_xpath: ./@href
-    title_xpath: .//h4
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: frrames
-    engine: xpath
-    shortcut: frr
-    categories: [design, mock-ups, figma]
-    paging: false
-    search_url: https://frrames.com/explore?q={query}
-    results_xpath: //div[contains(@class,'frame-card')]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 6.0
-    disabled: false
-
-  - name: pixelbuddha
-    engine: xpath
-    shortcut: pb
-    categories: [design, psd, figma, fonts]
-    paging: true
-    first_page_num: 1
-    page_size: 12
-    search_url: https://pixelbuddha.net/search?q={query}&page={pageno}
-    results_xpath: //article[contains(@class,'product-item')]
-    url_xpath: .//h3/a/@href
-    title_xpath: .//h3/a
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: unblast
-    engine: xpath
-    shortcut: ub
-    categories: [design, vectors, mock-ups, textures]
-    paging: true
-    first_page_num: 1
-    page_size: 12
-    search_url: https://unblast.com/page/{pageno}/?s={query}
-    results_xpath: //article[contains(@class,'type-post')]
-    url_xpath: .//h2/a/@href
-    title_xpath: .//h2/a
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
 # ------------------------------------------------------------- #
-#  AI / ML  –  models, datasets, prompts, papers
+#  AI / ML  –  models, datasets, prompts
 # ------------------------------------------------------------- #
   - name: huggingface
     engine: xpath
@@ -574,7 +326,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 15
-    search_url: https://huggingface.co/models?library=&q={query}&p={pageno}
+    search_url: "https://huggingface.co/models?library=&q={query}&p={pageno}"
     results_xpath: //article[contains(@class,'model-card')]
     url_xpath: .//a/@href
     title_xpath: .//h3
@@ -590,27 +342,11 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 15
-    search_url: https://huggingface.co/datasets?q={query}&p={pageno}
+    search_url: "https://huggingface.co/datasets?q={query}&p={pageno}"
     results_xpath: //article[contains(@class,'dataset-card')]
     url_xpath: .//a/@href
     title_xpath: .//h3
     content_xpath: .//p[@class='summary']
-    timeout: 8.0
-    disabled: false
-
-  - name: promptbase
-    engine: xpath
-    shortcut: pbt
-    categories: [ai, prompts]
-    paging: true
-    first_page_num: 1
-    page_size: 12
-    search_url: https://promptbase.com/search?q={query}&page={pageno}&price=free
-    results_xpath: //div[contains(@class,'prompt-grid-card')]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
     timeout: 8.0
     disabled: false
 
@@ -621,7 +357,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://lexica.art/api/v1/search?q={query}&page={pageno}
+    search_url: "https://lexica.art/api/v1/search?q={query}&page={pageno}"
     results_query: images
     url_query: src
     title_query: prompt
@@ -630,70 +366,8 @@ engines:
     timeout: 8.0
     disabled: false
 
-  - name: openml
-    engine: json_engine
-    shortcut: oml
-    categories: [ai, datasets]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.openml.org/api/v1/data/list/tag/{query}?limit={page_size}&offset={pageno}
-    results_query: data
-    url_query: url
-    title_query: name
-    content_query: description
-    timeout: 8.0
-    disabled: false
-
-  - name: paperswithcode
-    engine: xpath
-    shortcut: pwc
-    categories: [ai, science, code]
-    paging: true
-    first_page_num: 1
-    page_size: 25
-    search_url: https://paperswithcode.com/search?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'paper-card')]
-    url_xpath: .//h1/a/@href
-    title_xpath: .//h1/a
-    content_xpath: .//p[@class='paper-abstract']
-    timeout: 8.0
-    disabled: false
-
-  - name: civitai
-    engine: json_engine
-    shortcut: civ
-    categories: [ai, models]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://civitai.com/api/v1/models?query={query}&types=Checkpoint&sort=Highest Rated&page={pageno}
-    results_query: items
-    url_query: downloadUrl
-    title_query: name
-    content_query: description
-    thumbnail_query: images/0/url
-    timeout: 8.0
-    disabled: false
-
-  - name: kaggle-datasets
-    engine: xpath
-    shortcut: kgd
-    categories: [ai, datasets]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.kaggle.com/datasets?search={query}&page={pageno}
-    results_xpath: //div[@data-testid='dataset-list-item']
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//p
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
-    disabled: false
-
 # ------------------------------------------------------------- #
-#  PYTHON / DEV  –  packages, docs, tutorials, Q&A, notebooks
+#  PYTHON / DEV  –  packages, docs, tutorials
 # ------------------------------------------------------------- #
   - name: pypi
     engine: xpath
@@ -702,12 +376,11 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://pypi.org/search/?q={query}&page={pageno}
-    results_xpath: /html/body/main/div/div/div/form/div/ul/li/a[@class="package-snippet"]
+    search_url: "https://pypi.org/search/?q={query}&page={pageno}"
+    results_xpath: //a[@class='package-snippet']
     url_xpath: ./@href
-    title_xpath: ./h3/span[@class="package-snippet__name"]
+    title_xpath: ./h3/span[@class='package-snippet__name']
     content_xpath: ./p
-    suggestion_xpath: /html/body/main/div/div/div/form/div/div[@class="callout-block"]/p/span/a[@class="link"]
     timeout: 8.0
     disabled: false
 
@@ -716,28 +389,12 @@ engines:
     shortcut: pydoc
     categories: [python, docs, it]
     paging: false
-    search_url: https://docs.python.org/3/search.html?q={query}&check_keywords=yes&area=default
+    search_url: "https://docs.python.org/3/search.html?q={query}&check_keywords=yes&area=default"
     results_xpath: //dl[@class='search']/dt
     url_xpath: .//a/@href
     title_xpath: .//a
     content_xpath: ../dd[@class='search']/text()
     timeout: 6.0
-    disabled: false
-
-  - name: realpython
-    engine: xpath
-    shortcut: rp
-    categories: [python, tutorials, it]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://realpython.com/search/?q={query}&page={pageno}
-    results_xpath: //article[contains(@class,'post')]/header/h2/a/..
-    url_xpath: ./a/@href
-    title_xpath: ./a
-    content_xpath: ../p
-    thumbnail_xpath: ../img/@src
-    timeout: 8.0
     disabled: false
 
   - name: stackoverflow-python
@@ -753,36 +410,8 @@ engines:
     categories: [python, repos, it]
     disabled: false
 
-  - name: readthedocs-python
-    engine: xpath
-    shortcut: rtd
-    categories: [python, docs, it]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://readthedocs.org/search/?q={query}&type=file&page={pageno}
-    results_xpath: //li[@class='search-result-item']
-    url_xpath: .//a/@href
-    title_xpath: .//a
-    content_xpath: .//p
-    timeout: 8.0
-    disabled: false
-
-  - name: awesome-python
-    engine: xpath
-    shortcut: apy
-    categories: [python, resources, it]
-    paging: false
-    search_url: https://awesome-python.com/#{query}
-    results_xpath: //ul[@id='content']//a[contains(@href,'#{query}')]/..
-    url_xpath: ./a/@href
-    title_xpath: ./a
-    content_xpath: ./following-sibling::small[1]
-    timeout: 6.0
-    disabled: false
-
 # ------------------------------------------------------------- #
-#  IMAGES  –  royalty-free stock (CF-light)
+#  IMAGES  –  royalty-free stock
 # ------------------------------------------------------------- #
   - name: pixabay
     engine: xpath
@@ -791,7 +420,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://pixabay.com/images/search/{query}/?pagi={pageno}
+    search_url: "https://pixabay.com/images/search/{query}/?pagi={pageno}"
     results_xpath: //div[contains(@class,'item')]
     url_xpath: .//a/@href
     title_xpath: .//img/@alt
@@ -807,7 +436,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://stocksnap.io/search/{query}?page={pageno}
+    search_url: "https://stocksnap.io/search/{query}?page={pageno}"
     results_xpath: //a[contains(@class,'photo-grid-item')]
     url_xpath: ./@href
     title_xpath: ./img/@alt
@@ -816,100 +445,18 @@ engines:
     timeout: 8.0
     disabled: false
 
-  - name: kaboompics
+  - name: openmoji
     engine: xpath
-    shortcut: kab
-    categories: [images]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://kaboompics.com/search?search={query}&page={pageno}
-    results_xpath: //div[contains(@class,'photo')]//a[img]
+    shortcut: emj
+    categories: [design, icons]
+    paging: false
+    search_url: "https://openmoji.org/library/?search={query}"
+    results_xpath: //a[contains(@class,'library-grid-item')]
     url_xpath: ./@href
-    title_xpath: ./img/@alt
+    title_xpath: ./@title
     content_xpath: ./img/@src
     thumbnail_xpath: ./img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: reshot
-    engine: xpath
-    shortcut: rh
-    categories: [images, icons]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.reshot.com/search/{query}?page={pageno}
-    results_xpath: //a[contains(@class,'grid-item')]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: burst
-    engine: xpath
-    shortcut: bs
-    categories: [images]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://burst.shopify.com/search?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'grid-item')]//a[img]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: freeimages
-    engine: xpath
-    shortcut: fi
-    categories: [images]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.freeimages.com/search/{query}?page={pageno}
-    results_xpath: //div[contains(@class,'grid-item')]//a[img]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: stockvault
-    engine: xpath
-    shortcut: sv
-    categories: [images, textures]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.stockvault.net/search?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'item')]//a[img]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: wikimedia-commons
-    engine: xpath
-    shortcut: wc
-    categories: [images, videos, educational]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://commons.wikimedia.org/w/index.php?search={query}&page={pageno}
-    results_xpath: //li[contains(@class,'searchResult')]//a[img]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    timeout: 8.0
+    timeout: 6.0
     disabled: false
 
 # ------------------------------------------------------------- #
@@ -931,38 +478,6 @@ engines:
     engine: vimeo
     shortcut: vm
     categories: [videos]
-    disabled: false
-
-  - name: pexels-videos
-    engine: xpath
-    shortcut: pxv
-    categories: [videos]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://www.pexels.com/search/videos/{query}/?page={pageno}
-    results_xpath: //article[@data-testid='video-grid-item']//a[1]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
-    timeout: 8.0
-    disabled: false
-
-  - name: pixabay-videos
-    engine: xpath
-    shortcut: pxbv
-    categories: [videos]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://pixabay.com/videos/search/{query}/?pagi={pageno}
-    results_xpath: //div[contains(@class,'item')]
-    url_xpath: .//a/@href
-    title_xpath: .//img/@alt
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
     disabled: false
 
   - name: invidious
@@ -1001,7 +516,7 @@ engines:
     shortcut: cr
     categories: [science]
     paging: true
-    search_url: https://search.crossref.org/dois?q={query}&page={pageno}
+    search_url: "https://search.crossref.org/dois?q={query}&page={pageno}"
     url_query: doi
     title_query: title
     content_query: fullCitation
@@ -1014,26 +529,6 @@ engines:
     shortcut: pub
     categories: [science]
     timeout: 6.0
-    disabled: false
-
-  - name: openairepublications
-    engine: json_engine
-    shortcut: oap
-    categories: [science]
-    paging: true
-    search_url: https://api.openaire.eu/search/publications?format=json&page={pageno}&size=10&title={query}
-    results_query: response/results/result
-    url_query: metadata/oaf:entity/oaf:result/children/instance/webresource/url/$
-    title_query: metadata/oaf:entity/oaf:result/title/$
-    content_query: metadata/oaf:entity/oaf:result/description/$
-    content_html_to_text: true
-    timeout: 5.0
-    disabled: false
-
-  - name: semantic-scholar
-    engine: semantic_scholar
-    shortcut: se
-    categories: [science]
     disabled: false
 
 # ------------------------------------------------------------- #
@@ -1066,7 +561,7 @@ engines:
     disabled: false
 
 # ------------------------------------------------------------- #
-#  ONIONS  –  Tor services
+#  ONIONS  –  Tor services (disable if no Tor)
 # ------------------------------------------------------------- #
   - name: ahmia
     engine: ahmia
@@ -1081,17 +576,17 @@ engines:
     shortcut: tch
     categories: [onions]
     paging: true
-    search_url: http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/cgi-bin/omega/omega?P={query}&DEFAULTOP=and
+    search_url: "http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/cgi-bin/omega/omega?P={query}&DEFAULTOP=and"
     results_xpath: //table//tr
     url_xpath: ./td[2]/a
     title_xpath: ./td[2]/b
     content_xpath: ./td[2]/small
     enable_http: true
     timeout: 30.0
-    disabled: true
+    disabled: true          # ← no Tor? keep off
 
 # ------------------------------------------------------------- #
-#  SOCIAL / NEWS  –  Reddit, X, LinkedIn, Yahoo, Naver
+#  SOCIAL / NEWS  –  Reddit, Yahoo, LinkedIn
 # ------------------------------------------------------------- #
   - name: reddit
     engine: reddit
@@ -1107,7 +602,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 10
-    search_url: https://search.yahoo.com/search?p={query}&b={pageno}
+    search_url: "https://search.yahoo.com/search?p={query}&b={pageno}"
     results_xpath: //div[@class='algo']
     url_xpath: .//h3/a/@href
     title_xpath: .//h3/a
@@ -1122,142 +617,11 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 10
-    search_url: https://www.linkedin.com/search/results/content/?keywords={query}&page={pageno}
+    search_url: "https://www.linkedin.com/search/results/content/?keywords={query}&page={pageno}"
     results_xpath: //li[contains(@class,'reusable-search__result-container')]
     url_xpath: .//a/@href
     title_xpath: .//span[@class='entity-result__title-text']
     content_xpath: .//p[@class='entity-result__summary']
     thumbnail_xpath: .//img/@src
     timeout: 8.0
-    disabled: false
-
-# ------------------------------------------------------------- #
-#  CHINESE  –  Bing-CN, WeChat, Bilibili, Youku
-# ------------------------------------------------------------- #
-
-  - name: sogou-wechat
-    engine: xpath
-    shortcut: sgw
-    categories: [news, social media]
-    paging: true
-    first_page_num: 1
-    page_size: 10
-    search_url: https://weixin.sogou.com/weixin?query={query}&type=2&page={pageno}
-    results_xpath: //div[@class='txt-box']
-    url_xpath: .//h3/a/@href
-    title_xpath: .//h3/a
-    content_xpath: .//p[@class='txt-info']
-    timeout: 8.0
-    disabled: false
-
-  - name: bilibili
-    engine: json_engine
-    shortcut: bili
-    categories: [videos]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={query}&page={pageno}
-    results_query: data/result
-    url_query: arcurl
-    title_query: title
-    content_query: description
-    timeout: 8.0
-    disabled: true
-
-  - name: youku
-    engine: xpath
-    shortcut: yk
-    categories: [videos]
-    paging: true
-    first_page_num: 1
-    page_size: 15
-    search_url: https://www.youku.com/search/video?q={query}&page={pageno}
-    results_xpath: //div[contains(@class,'video-item')]
-    url_xpath: .//a[@class='video-link']/@href
-    title_xpath: .//a[@class='video-link']/@title
-    content_xpath: .//img/@src
-    thumbnail_xpath: .//img/@src
-    timeout: 10.0
-    disabled: false
-
-# ------------------------------------------------------------- #
-#  BETTING / SPORTS  –  BET.br (Brazil)
-# ------------------------------------------------------------- #
-  - name: betbr-odds
-    engine: xpath
-    shortcut: betbr
-    categories: [sports, betting, brazil]
-    paging: false
-    search_url: https://www.bet.br/search?q={query}
-    results_xpath: //div[@data-testid='event-card']
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//span[@class='odd-value']
-    thumbnail_xpath: .//img/@src
-    timeout: 6.0
-    disabled: false
-
-# ------------------------------------------------------------- #
-#  YANKEES  –  TikTok, LinkedIn, Yahoo, Reddit
-# ------------------------------------------------------------- 
-  - name: reddit
-    engine: reddit
-    shortcut: re
-    page_size: 25
-    categories: [social media, news]
-    disabled: false
-
-# ------------------------------------------------------------- #
-#  TORRENTS  –  magnets & hashes
-# ------------------------------------------------------------- #
-  - name: solidtorrents
-    engine: solidtorrents
-    shortcut: solid
-    categories: [torrents, files]
-    timeout: 6.0
-    disabled: false
-
-  - name: 1337x
-    engine: 1337x
-    shortcut: 1337x
-    categories: [torrents, files]
-    disabled: false
-
-  - name: piratebay
-    engine: piratebay
-    shortcut: tpb
-    categories: [torrents, files]
-    timeout: 3.0
-    disabled: false
-
-  - name: kickass
-    engine: kickass
-    shortcut: kc
-    timeout: 4.0
-    disabled: false
-
-# ------------------------------------------------------------- #
-#  ONIONS  –  Tor services
-# ------------------------------------------------------------- #
-  - name: ahmia
-    engine: ahmia
-    shortcut: ah
-    categories: [onions]
-    enable_http: true
-    timeout: 10.0
-    disabled: false
-
-  - name: torch
-    engine: xpath
-    shortcut: tch
-    categories: [onions]
-    paging: true
-    search_url: http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/cgi-bin/omega/omega?P={query}&DEFAULTOP=and
-    results_xpath: //table//tr
-    url_xpath: ./td[2]/a
-    title_xpath: ./td[2]/b
-    content_xpath: ./td[2]/small
-    enable_http: true
-    timeout: 30.0
     disabled: false
