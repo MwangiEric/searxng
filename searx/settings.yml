@@ -6,6 +6,8 @@ search:
   formats:
     - html
     - json
+    - css
+    - csv
 
 server:
   secret_key: "CHANGE_ME"
