@@ -692,7 +692,7 @@ engines:
     engine: duckduckgo
     shortcut: ddg
 
-      - name: aol
+  - name: aol
     engine: aol
     shortcut: aol
     categories: general
