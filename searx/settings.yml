@@ -173,34 +173,19 @@ engines:
     engine: google
     shortcut: go
     categories: [general]
-    disabled: true
+    disabled: false
 
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: [general]
-    disabled: true          # JSON decode error
+    disabled: false         # JSON decode error
 
   - name: brave
     engine: brave
     shortcut: brave
     categories: [general]
-    disabled: true
-
-  - name: kagi
-    engine: json_engine
-    shortcut: kagi
-    categories: [general]
-    paging: true
-    search_url: "https://kagi.com/api/v0/search?q={query}&offset={pageno}"
-    headers:
-      Authorization: 'Bot {{ getenv "KAGI_API_KEY" }}'
-    results_query: data
-    url_query: url
-    title_query: title
-    content_query: snippet
-    timeout: 8.0
-    disabled: true
+    disabled: false
 
 # ------------------------------------------------------------- #
 #  KENYAN  –  news, cars, real-estate, shopping
