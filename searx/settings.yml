@@ -11,7 +11,7 @@ search:
     - csv
 
 server:
-  secret_key: "CHANGE_ME"
+  secret_key: 6b8h2g8rn483hbd8
   public_instance: false
   image_proxy: true
 
