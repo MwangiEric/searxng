@@ -181,7 +181,7 @@ engines:
 
   - name: swisscows
     engine: xpath
-    shortcut: sc
+    shortcut: swc
     categories: general
     paging: true
     first_page_num: 1
