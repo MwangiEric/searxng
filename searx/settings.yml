@@ -99,27 +99,63 @@ engines:
       wikidata_id: Q107355971
 
   - name: ecosia
-    engine: ecosia
+    engine: xpath
     shortcut: eco
     categories: general
+    paging: true
+    first_page_num: 0
+    page_size: 10
+    search_url: https://www.ecosia.org/search?q={query}&p={pageno}
+    results_xpath: //div[@data-test-id='mainline']//article
+    url_xpath: .//h2/a/@href
+    title_xpath: .//h2/a
+    content_xpath: .//p[@data-test-id='result-snippet']
+    timeout: 8.0
     disabled: false
 
   - name: qwant
-    engine: qwant
+    engine: xpath
     shortcut: qw
     categories: general
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://www.qwant.com/?q={query}&t=web&p={pageno}
+    results_xpath: //div[contains(@class,'result')]
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    timeout: 8.0
     disabled: false
 
   - name: yandex
-    engine: yandex
+    engine: xpath
     shortcut: ya
     categories: general
+    paging: true
+    first_page_num: 0
+    page_size: 10
+    search_url: https://yandex.com/search/?text={query}&p={pageno}
+    results_xpath: //li[contains(@class,'serp-item')]
+    url_xpath: .//h2/a/@href
+    title_xpath: .//h2/a
+    content_xpath: .//div[contains(@class,'text-container')]
+    timeout: 8.0
     disabled: false
 
   - name: mojeek
-    engine: mojeek
+    engine: xpath
     shortcut: mjk
     categories: general
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://www.mojeek.com/search?q={query}&s={pageno}
+    results_xpath: //li[@class='result']
+    url_xpath: .//a[@class='ob']/@href
+    title_xpath: .//a[@class='ob']
+    content_xpath: .//p[@class='s']
+    timeout: 8.0
     disabled: false
 
   - name: yahoo
@@ -128,46 +164,64 @@ engines:
     categories: general
     disabled: false
 
-  - name: aol
-    engine: aol
-    shortcut: aol
-    categories: general
-    disabled: false
-
-  - name: lycos
-    engine: lycos
-    shortcut: lyc
-    categories: general
-    disabled: false
-
-  - name: excite
-    engine: excite
-    shortcut: exc
-    categories: general
-    disabled: false
-
-  - name: dogpile
-    engine: dogpile
-    shortcut: dog
-    categories: general
-    disabled: false
-
-  - name: you
-    engine: you
-    shortcut: you
-    categories: general
-    disabled: false
-
   - name: presearch
-    engine: presearch
+    engine: xpath
     shortcut: pre
     categories: general
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://presearch.com/search?q={query}&page={pageno}
+    results_xpath: //div[@class='result']
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    timeout: 8.0
     disabled: false
 
-  - name: ask
-    engine: ask
-    shortcut: ask
+  - name: swisscows
+    engine: xpath
+    shortcut: sc
     categories: general
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://swisscows.com/web?query={query}&page={pageno}
+    results_xpath: //article[@class='web-result']
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p[@class='description']
+    timeout: 8.0
+    disabled: false
+
+  - name: metager
+    engine: xpath
+    shortcut: mg
+    categories: general
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://metager.org/meta/meta.ger3?eingabe={query}&page={pageno}
+    results_xpath: //div[@class='result-item']
+    url_xpath: .//h4/a/@href
+    title_xpath: .//h4/a
+    content_xpath: .//p[@class='result-description']
+    timeout: 8.0
+    disabled: false
+
+  - name: gigablast
+    engine: xpath
+    shortcut: gb
+    categories: general
+    paging: true
+    first_page_num: 0
+    page_size: 10
+    search_url: https://www.gigablast.com/search?q={query}&s={pageno}
+    results_xpath: //div[@class='result']
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//div[@class='sum']
+    timeout: 8.0
     disabled: false
 
 # ============================================================= #
@@ -1145,9 +1199,18 @@ engines:
     categories: [social media, videos]
 
   - name: framalibre
-    engine: framalibre
+    engine: xpath
     shortcut: frl
     categories: [social media, it]
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://framalibre.org/recherche-par-crit-res?keys={query}&page={pageno}
+    results_xpath: //div[contains(@class,'node')]
+    url_xpath: .//h3/a/@href
+    title_xpath: .//h3/a
+    content_xpath: .//div[@class='content']
+    timeout: 8.0
     disabled: false
 
 # ============================================================= #
@@ -1229,9 +1292,12 @@ engines:
 #  DICTIONARIES & TRANSLATIONS
 # ============================================================= #
   - name: wiktionary
-    engine: wiktionary
+    engine: mediawiki
     shortcut: wikt
     categories: [dictionaries]
+    base_url: "https://{language}.wiktionary.org/"
+    number_of_results: 5
+    search_type: text
     disabled: false
 
   - name: wordnik
@@ -1277,12 +1343,18 @@ engines:
     categories: dictionaries
     disabled: false
 
-  - name: słownik języka polskiego
-    engine: sjp
+  - name: słownik-polski
+    engine: xpath
     shortcut: sjp
     base_url: https://sjp.pwn.pl/
     timeout: 5.0
     categories: dictionaries
+    paging: false
+    search_url: https://sjp.pwn.pl/szukaj/{query}.html
+    results_xpath: //div[@class='wyniki']//li
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//p
     disabled: false
 
 # ============================================================= #
