@@ -1,3 +1,5 @@
+# SearXNG settings.yml - Final Corrected Version
+
 use_default_settings: true
 
 .tests_infobox: &tests_infobox  []
@@ -517,6 +519,7 @@ engines:
     results_xpath: //a[@class='_list-item']
     url_xpath: ./@href
     title_xpath: .//span[@class='_list-text']
+    content_xpath: .//span[@class='_list-text'] # <-- FIX 1: Added missing content_xpath
     timeout: 6.0
     disabled: false
 
@@ -800,7 +803,7 @@ engines:
 
   - name: producthunt
     engine: xpath
-    shortcut: ph
+    shortcut: phunt # <-- FIX 2: Changed shortcut from 'ph' to 'phunt'
     categories: [alternatives, app discovery, it]
     paging: false
     search_url: https://www.producthunt.com/search?q={query}
@@ -1152,10 +1155,7 @@ engines:
     paging: true
     search_url: https://api.openaire.eu/search/publications?format=json&page={pageno}&size=10&title={query}
     results_query: response/results/result
-    url_query: metadata/oaf:entity/oaf:result/children/instance/webresource/url/$
-    title_query: metadata/oaf:entity/oaf:result/title/$
-    content_query: metadata/oaf:entity/oaf:result/description/$
-    content_html_to_text: true
+    url_query: metadata/oaf:entity/oaf:result/children/instance/webresource/url/$     title_query: metadata/oaf:entity/oaf:result/title/$     content_query: metadata/oaf:entity/oaf:result/description/$     content_html_to_text: true
     categories: science
     shortcut: oap
     timeout: 5.0
@@ -1165,10 +1165,7 @@ engines:
     paging: true
     search_url: https://api.openaire.eu/search/datasets?format=json&page={pageno}&size=10&title={query}
     results_query: response/results/result
-    url_query: metadata/oaf:entity/oaf:result/children/instance/webresource/url/$
-    title_query: metadata/oaf:entity/oaf:result/title/$
-    content_query: metadata/oaf:entity/oaf:result/description/$
-    content_html_to_text: true
+    url_query: metadata/oaf:entity/oaf:result/children/instance/webresource/url/$     title_query: metadata/oaf:entity/oaf:result/title/$     content_query: metadata/oaf:entity/oaf:result/description/$     content_html_to_text: true
     categories: science
     shortcut: oad
     timeout: 5.0
