@@ -1748,9 +1748,9 @@ outgoing:
   pool_maxsize: 20
   enable_http2: true
   # Proxy configuration (commented out - enable if needed)
-  # proxies:
-  #   http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
-  #   https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
+  proxies:
+     http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
+     https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
 
 # ============================================================= #
 #  PLUGINS
