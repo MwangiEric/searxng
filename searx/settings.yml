@@ -15,30 +15,27 @@ brand:
   wiki_url: https://github.com/searxng/searxng/wiki
   issue_url: https://github.com/searxng/searxng/issues
 
-# ============================================================
-# CATEGORIES
-# ============================================================
 categories_as_tabs:
   general:
   images:
   videos:
   news:
   music:
-  it:           # Tech/IT
+  it:
   science:
   files:
   social:
-  dev:          # Development
-  ai:           # AI/ML tools
-  design:       # Visual assets
-  misc:         # Utilities
+  dev:
+  ai:
+  design:
+  misc:
 
-# ============================================================
-# ENGINES - GENERAL
-# ============================================================
 engines:
 
-  # --- Core General Search ---
+# ============================================================
+# GENERAL - Reliable engines only
+# ============================================================
+
   - name: google
     engine: google
     shortcut: go
@@ -54,12 +51,6 @@ engines:
     engine: duckduckgo
     shortcut: ddg
     categories: general
-
-  - name: brave
-    engine: brave
-    shortcut: brave
-    categories: general
-    timeout: 5.0
 
   - name: startpage
     engine: startpage
@@ -85,11 +76,17 @@ engines:
     categories: general
     timeout: 8.0
 
-  - name: yandex
-    engine: yandex
-    shortcut: ya
-    categories: general
-    timeout: 8.0
+  # DISABLED: Brave - Too Many Requests errors
+  # - name: brave
+  #   engine: brave
+  #   shortcut: brave
+  #   categories: general
+
+  # DISABLED: Yandex - Often blocked
+  # - name: yandex
+  #   engine: yandex
+  #   shortcut: ya
+  #   categories: general
 
   - name: wiby
     engine: json_engine
@@ -99,15 +96,13 @@ engines:
     url_query: URL
     title_query: Title
     content_query: Snippet
-    disabled: false
 
   - name: presearch
     engine: presearch
     shortcut: ps
-    categories: [general, web]
+    categories: [general]
     timeout: 4.0
 
-  # --- Wikipedia & Knowledge ---
   - name: wikipedia
     engine: wikipedia
     shortcut: wp
@@ -121,15 +116,6 @@ engines:
     categories: [general]
     timeout: 3.0
 
-  - name: wiktionary
-    engine: mediawiki
-    shortcut: wikt
-    categories: [general]
-    base_url: "https://{language}.wiktionary.org/"
-    number_of_results: 5
-    search_type: text
-    disabled: true
-
   - name: duckduckgo definitions
     engine: duckduckgo_definitions
     shortcut: ddd
@@ -142,22 +128,10 @@ engines:
     categories: [general]
     timeout: 5.0
 
-  - name: etymonline
-    engine: xpath
-    shortcut: et
-    categories: [general]
-    paging: true
-    search_url: https://etymonline.com/search?page={pageno}&q={query}
-    url_xpath: //a[contains(@class, "word__name--")]/@href
-    title_xpath: //a[contains(@class, "word__name--")]
-    content_xpath: //section[contains(@class, "word__defination")]
-    first_page_num: 1
-
 # ============================================================
-# ENGINES - IMAGES (Native + Essential XPath)
+# IMAGES - Reliable engines only
 # ============================================================
 
-  # --- Native Image Engines (Reliable) ---
   - name: unsplash
     engine: unsplash
     shortcut: us
@@ -198,22 +172,11 @@ engines:
     shortcut: spi
     categories: images
 
-  - name: brave.images
-    engine: brave
-    shortcut: bri
-    categories: images
-
   - name: deviantart
     engine: deviantart
     shortcut: da
     timeout: 5.0
     categories: images
-
-  - name: flickr
-    engine: flickr_noapi
-    shortcut: fl
-    categories: images
-    disabled: true    # Often slow, enable if needed
 
   - name: 1x
     engine: www1x
@@ -225,22 +188,6 @@ engines:
     engine: imgur
     shortcut: img
     categories: images
-
-  - name: library of congress
-    engine: loc
-    shortcut: loc
-    categories: images
-
-  - name: wikimedia commons images
-    engine: wikicommons
-    shortcut: wci
-    categories: images
-
-  - name: pinterest
-    engine: pinterest
-    shortcut: pin
-    categories: images
-    timeout: 5.0
 
   - name: svgrepo
     engine: svgrepo
@@ -262,81 +209,56 @@ engines:
     shortcut: sh
     categories: [images, design]
 
-  # --- Essential XPath Image Engines ---
-  - name: freepik
-    engine: xpath
-    shortcut: fp
+  - name: uxwing
+    engine: uxwing
+    shortcut: uxw
     categories: [images, design]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.freepik.com/search?format=search&query={query}&type=photo
-    results_xpath: //figure[contains(@class,'showcase__item')]
-    url_xpath: .//a/@href
-    title_xpath: .//a/@title
-    content_xpath: .//img/@alt
-    thumbnail_xpath: .//img/@data-src
-    timeout: 10.0
 
-  - name: rawpixel
-    engine: xpath
-    shortcut: raw
-    categories: [images, design]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://www.rawpixel.com/search/{query}?sort=curated&mode=free&page={pageno}
-    results_xpath: //div[contains(@class,'grid-item')]
-    url_xpath: .//a/@href
-    title_xpath: .//img/@alt
-    content_xpath: .//img/@alt
-    thumbnail_xpath: .//img/@src
-    timeout: 10.0
+  # DISABLED: Flickr - Often slow/unreliable
+  # - name: flickr
+  #   engine: flickr_noapi
+  #   shortcut: fl
+  #   categories: images
 
-  - name: stocksnap
-    engine: xpath
-    shortcut: ss
-    categories: images
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://stocksnap.io/search/{query}?page={pageno}
-    results_xpath: //a[contains(@class,'photo-grid-item')]
-    url_xpath: ./@href
-    title_xpath: ./img/@alt
-    content_xpath: ./img/@src
-    thumbnail_xpath: ./img/@src
+  # DISABLED: Frinkiac - As requested
+  # - name: frinkiac
+  #   engine: frinkiac
+  #   shortcut: frk
+  #   categories: images
 
-  - name: openclipart
-    engine: xpath
-    shortcut: oclip
-    categories: [images, design]
-    paging: true
-    first_page_num: 1
-    page_size: 20
-    search_url: https://openclipart.org/search/?query={query}&page={pageno}
-    results_xpath: //div[contains(@class,'gallery-item')]
-    url_xpath: .//a/@href
-    title_xpath: .//img/@alt
-    content_xpath: .//img/@alt
-    thumbnail_xpath: .//img/@src
-    timeout: 8.0
+  # DISABLED: Library of Congress - Niche
+  # - name: library of congress
+  #   engine: loc
+  #   shortcut: loc
+  #   categories: images
 
-  - name: tineye
-    engine: tineye
-    shortcut: tin
-    timeout: 9.0
-    categories: images    # Reverse image search
+  # DISABLED: Wikimedia Commons via native - Use images instead
+  # - name: wikimedia commons images
+  #   engine: wikicommons
+  #   shortcut: wci
+  #   categories: images
 
-  - name: frinkiac
-    engine: frinkiac
-    shortcut: frk
-    timeout: 3.0
-    categories: images    # Simpsons screenshots
-    disabled: true        # As requested
+  # DISABLED: Pinterest - Blocks scrapers
+  # - name: pinterest
+  #   engine: pinterest
+  #   shortcut: pin
+  #   categories: images
+
+  # DISABLED: TinEye - Slow, use for reverse search only when needed
+  # - name: tineye
+  #   engine: tineye
+  #   shortcut: tin
+  #   timeout: 9.0
+  #   categories: images
+
+  # DISABLED: Adobe Stock - Premium
+  # - name: adobe stock
+  #   engine: adobe_stock
+  #   shortcut: adobe
+  #   categories: [design, images]
 
 # ============================================================
-# ENGINES - VIDEOS
+# VIDEOS - Reliable engines
 # ============================================================
 
   - name: youtube
@@ -359,11 +281,6 @@ engines:
     shortcut: qwv
     categories: videos
 
-  - name: brave.videos
-    engine: brave
-    shortcut: brv
-    categories: videos
-
   - name: vimeo
     engine: vimeo
     shortcut: vm
@@ -374,46 +291,32 @@ engines:
     shortcut: dm
     categories: videos
 
-  - name: peertube
-    engine: peertube
-    shortcut: ptb
-    categories: videos
-    paging: true
-    base_url: https://peertube.biz/
-    timeout: 6.0
+  # DISABLED: PeerTube - Often timeout
+  # - name: peertube
+  #   engine: peertube
+  #   shortcut: ptb
+  #   categories: videos
 
-  - name: rumble
-    engine: rumble
-    shortcut: ru
-    categories: videos
+  # DISABLED: Rumble - Proxy issues
+  # - name: rumble
+  #   engine: rumble
+  #   shortcut: ru
+  #   categories: videos
 
-  - name: bitchute
-    engine: bitchute
-    shortcut: bc
-    categories: videos
+  # DISABLED: Bitchute - Proxy issues
+  # - name: bitchute
+  #   engine: bitchute
+  #   shortcut: bc
+  #   categories: videos
 
-  - name: invidious
-    engine: invidious
-    shortcut: iv
-    timeout: 3.0
-    categories: videos
-    base_url:
-      - https://invidious.snopyta.org
-      - https://vid.puffyan.us
-
-  - name: mediathekviewweb
-    engine: mediathekviewweb
-    shortcut: mvw
-    categories: videos
-
-  - name: ina
-    engine: ina
-    shortcut: in
-    timeout: 6.0
-    categories: videos
+  # DISABLED: Invidious - Instance reliability issues
+  # - name: invidious
+  #   engine: invidious
+  #   shortcut: iv
+  #   categories: videos
 
 # ============================================================
-# ENGINES - NEWS
+# NEWS - Reliable engines
 # ============================================================
 
   - name: google news
@@ -431,16 +334,6 @@ engines:
     shortcut: qwn
     categories: news
 
-  - name: brave.news
-    engine: brave
-    shortcut: brn
-    categories: news
-
-  - name: startpage news
-    engine: startpage
-    shortcut: spn
-    categories: news
-
   - name: reddit
     engine: reddit
     shortcut: re
@@ -452,21 +345,26 @@ engines:
     shortcut: hn
     categories: [news, social, it]
 
-  - name: reuters
-    engine: reuters
-    shortcut: reu
-    categories: news
+  # DISABLED: Startpage news - Often timeout
+  # - name: startpage news
+  #   engine: startpage
+  #   shortcut: spn
+  #   categories: news
 
-  - name: wikinews
-    engine: mediawiki
-    shortcut: wn
-    categories: news
-    base_url: "https://{language}.wikinews.org/"
-    number_of_results: 5
-    search_type: text
+  # DISABLED: Reuters - API changes
+  # - name: reuters
+  #   engine: reuters
+  #   shortcut: reu
+  #   categories: news
+
+  # DISABLED: Wikinews - Low usage
+  # - name: wikinews
+  #   engine: mediawiki
+  #   shortcut: wn
+  #   categories: news
 
 # ============================================================
-# ENGINES - MUSIC
+# MUSIC - Reliable engines
 # ============================================================
 
   - name: soundcloud
@@ -489,29 +387,20 @@ engines:
     shortcut: gen
     categories: music
 
-  - name: deezer
-    engine: deezer
-    shortcut: dz
-    categories: music
+  # DISABLED: Deezer - API changes
+  # - name: deezer
+  #   engine: deezer
+  #   shortcut: dz
+  #   categories: music
 
-  - name: yandex music
-    engine: yandex_music
-    shortcut: ydm
-    categories: music
-    disabled: true    # Requires auth
-
-  - name: podcastindex
-    engine: podcastindex
-    shortcut: podcast
-    categories: music
-
-  - name: fyyd
-    engine: fyyd
-    shortcut: fy
-    categories: music
+  # DISABLED: Yandex Music - Requires auth
+  # - name: yandex music
+  #   engine: yandex_music
+  #   shortcut: ydm
+  #   categories: music
 
 # ============================================================
-# ENGINES - IT/TECH
+# IT - Reliable engines
 # ============================================================
 
   - name: arch linux wiki
@@ -588,8 +477,14 @@ engines:
     content_xpath: .//p[contains(@class,'packages-description')]
     first_page_num: 1
 
+  # DISABLED: Habrahabr - Russian site, proxy issues
+  # - name: habrahabr
+  #   engine: xpath
+  #   shortcut: habr
+  #   categories: [it, misc]
+
 # ============================================================
-# ENGINES - DEVELOPMENT
+# DEVELOPMENT - Reliable engines
 # ============================================================
 
   - name: github
@@ -601,17 +496,6 @@ engines:
     engine: gitlab
     shortcut: gl
     categories: [dev, files]
-
-  - name: bitbucket
-    engine: xpath
-    shortcut: bb
-    categories: [dev, files]
-    paging: true
-    search_url: https://bitbucket.org/repo/all/{pageno}?name={query}
-    url_xpath: //article[contains(@class,"repo-summary")]//a[contains(@class,"repo-link")]/@href
-    title_xpath: //article[contains(@class,"repo-summary")]//a[contains(@class,"repo-link")]
-    content_xpath: //article[contains(@class,"repo-summary")]/p
-    timeout: 4.0
 
   - name: sourcehut
     engine: sourcehut
@@ -735,7 +619,7 @@ engines:
   - name: hoogle
     engine: xpath
     shortcut: ho
-    categories: [dev, documentation]
+    categories: [dev, it]
     paging: true
     search_url: https://hoogle.haskell.org/?hoogle={query}&start={pageno}
     results_xpath: //div[@class="result"]
@@ -765,8 +649,14 @@ engines:
     content_xpath: .//a[@class="domain"]
     timeout: 5.0
 
+  # DISABLED: Bitbucket - Proxy issues
+  # - name: bitbucket
+  #   engine: xpath
+  #   shortcut: bb
+  #   categories: [dev, files]
+
 # ============================================================
-# ENGINES - AI/ML
+# AI/ML - Reliable engines
 # ============================================================
 
   - name: huggingface
@@ -789,11 +679,12 @@ engines:
     shortcut: pwc
     categories: [ai, science]
 
-  - name: ollama
-    engine: ollama
-    shortcut: ol
-    categories: ai
-    base_url: http://localhost:11434
+  # DISABLED: Ollama - Requires local instance
+  # - name: ollama
+  #   engine: ollama
+  #   shortcut: ol
+  #   categories: ai
+  #   base_url: http://localhost:11434
 
   - name: openalex
     engine: openalex
@@ -806,7 +697,7 @@ engines:
     categories: [ai, science]
 
 # ============================================================
-# ENGINES - SCIENCE
+# SCIENCE - Reliable engines
 # ============================================================
 
   - name: arxiv
@@ -826,31 +717,17 @@ engines:
     categories: science
     timeout: 3.0
 
-  - name: openaire publications
-    engine: json_engine
-    shortcut: oap
-    categories: science
-    paging: true
-    search_url: https://api.openaire.eu/search/publications?format=json&page={pageno}&size=10&title={query}
-    results_query: response/results/result
-    url_query: "metadata/oaf:entity/oaf:result/children/instance/webresource/url/$"
-    title_query: "metadata/oaf:entity/oaf:result/title/$"
-    content_query: "metadata/oaf:entity/oaf:result/description/$"
-    content_html_to_text: true
-    timeout: 5.0
+  # DISABLED: OpenAIRE - Complex, timeout issues
+  # - name: openaire publications
+  #   engine: json_engine
+  #   shortcut: oap
+  #   categories: science
 
-  - name: openaire datasets
-    engine: json_engine
-    shortcut: oad
-    categories: science
-    paging: true
-    search_url: https://api.openaire.eu/search/datasets?format=json&page={pageno}&size=10&title={query}
-    results_query: response/results/result
-    url_query: "metadata/oaf:entity/oaf:result/children/instance/webresource/url/$"
-    title_query: "metadata/oaf:entity/oaf:result/title/$"
-    content_query: "metadata/oaf:entity/oaf:result/description/$"
-    content_html_to_text: true
-    timeout: 5.0
+  # DISABLED: OpenAIRE datasets - Complex
+  # - name: openaire datasets
+  #   engine: json_engine
+  #   shortcut: oad
+  #   categories: science
 
   - name: crossref
     engine: json_engine
@@ -869,14 +746,14 @@ engines:
     shortcut: pdb
     categories: science
 
-  - name: artic
-    engine: artic
-    shortcut: art
-    timeout: 4.0
-    categories: science
+  # DISABLED: Artic - Niche
+  # - name: artic
+  #   engine: artic
+  #   shortcut: art
+  #   categories: science
 
 # ============================================================
-# ENGINES - FILES
+# FILES - Reliable engines
 # ============================================================
 
   - name: github
@@ -909,57 +786,65 @@ engines:
     shortcut: ol
     categories: files
 
-  - name: wikisource
-    engine: mediawiki
-    shortcut: ws
-    categories: files
-    base_url: https://wikisource.org/
+  # DISABLED: WikiSource - Low usage
+  # - name: wikisource
+  #   engine: mediawiki
+  #   shortcut: ws
+  #   categories: files
 
-  - name: piratebay
-    engine: piratebay
-    shortcut: tpb
-    categories: files
-
+  # DISABLED: Most torrent engines - Proxy issues, legal concerns
+  # Keeping only most reliable ones
   - name: 1337x
     engine: 1337x
     shortcut: 1337x
     categories: files
+    disabled: true    # Enable if needed
 
   - name: solidtorrents
     engine: solidtorrents
     shortcut: solid
     timeout: 4.0
     categories: files
+    disabled: true
 
-  - name: kickass
-    engine: kickass
-    shortcut: kc
-    timeout: 4.0
-    categories: files
+  # DISABLED: PirateBay - Proxy issues
+  # - name: piratebay
+  #   engine: piratebay
+  #   shortcut: tpb
+  #   categories: files
 
-  - name: bt4g
-    engine: bt4g
-    shortcut: bt4g
-    categories: files
+  # DISABLED: Kickass - Unreliable
+  # - name: kickass
+  #   engine: kickass
+  #   shortcut: kc
+  #   categories: files
 
-  - name: tokyotoshokan
-    engine: tokyotoshokan
-    shortcut: tt
-    timeout: 6.0
-    categories: files
+  # DISABLED: BT4G - Proxy issues
+  # - name: bt4g
+  #   engine: bt4g
+  #   shortcut: bt4g
+  #   categories: files
 
-  - name: nyaa
-    engine: nyaa
-    shortcut: nt
-    categories: files
+  # DISABLED: TokyoToshokan - Niche
+  # - name: tokyotoshokan
+  #   engine: tokyotoshokan
+  #   shortcut: tt
+  #   categories: files
 
-  - name: btdigg
-    engine: btdigg
-    shortcut: bt
-    categories: files
+  # DISABLED: Nyaa - Niche
+  # - name: nyaa
+  #   engine: nyaa
+  #   shortcut: nt
+  #   categories: files
+
+  # DISABLED: BTDigg - Unreliable
+  # - name: btdigg
+  #   engine: btdigg
+  #   shortcut: bt
+  #   categories: files
 
 # ============================================================
-# ENGINES - SOCIAL
+# SOCIAL - Reliable engines
 # ============================================================
 
   - name: reddit
@@ -1008,18 +893,20 @@ engines:
     shortcut: toot
     categories: social
 
-  - name: sepiasearch
-    engine: sepiasearch
-    shortcut: sep
-    categories: [social, videos]
+  # DISABLED: SepiaSearch - Timeout issues
+  # - name: sepiasearch
+  #   engine: sepiasearch
+  #   shortcut: sep
+  #   categories: [social, videos]
 
-  - name: 9gag
-    engine: 9gag
-    shortcut: 9g
-    categories: social
+  # DISABLED: 9GAG - Low quality
+  # - name: 9gag
+  #   engine: 9gag
+  #   shortcut: 9g
+  #   categories: social
 
 # ============================================================
-# ENGINES - DESIGN (Visual Assets)
+# DESIGN - Essential XPath engines retained
 # ============================================================
 
   - name: freepik
@@ -1107,14 +994,14 @@ engines:
     shortcut: uxw
     categories: [design, images]
 
-  - name: adobe stock
-    engine: adobe_stock
-    shortcut: adobe
-    categories: [design, images]
-    disabled: true    # Premium
+  # DISABLED: Stocksnap - Use Unsplash/Pexels instead
+  # - name: stocksnap
+  #   engine: xpath
+  #   shortcut: ss
+  #   categories: images
 
 # ============================================================
-# ENGINES - MISC/UTILITIES
+# MISC/UTILITIES - Reliable engines
 # ============================================================
 
   - name: wolframalpha
@@ -1181,94 +1068,68 @@ engines:
     shortcut: stm
     categories: misc
 
-  - name: annas archive
-    engine: annas_archive
-    shortcut: an
-    categories: [files, misc]
+  # DISABLED: FindThatMeme - Niche
+  # - name: findthatmeme
+  #   engine: findthatmeme
+  #   shortcut: ftm
+  #   categories: misc
 
-  - name: openlibrary
-    engine: openlibrary
-    shortcut: olb
-    categories: misc
+  # DISABLED: SensCritique - Niche
+  # - name: senscritique
+  #   engine: senscritique
+  #   shortcut: scq
+  #   categories: misc
 
-  - name: findthatmeme
-    engine: findthatmeme
-    shortcut: ftm
-    categories: misc
+  # DISABLED: Tagesschau - German only
+  # - name: tagesschau
+  #   engine: tagesschau
+  #   shortcut: ts
+  #   categories: news
 
-  - name: senscritique
-    engine: senscritique
-    shortcut: scq
-    categories: misc
+  # DISABLED: IlPost - Italian only
+  # - name: ilpost
+  #   engine: il_post
+  #   shortcut: ilp
+  #   categories: news
 
-  - name: tagesschau
-    engine: tagesschau
-    shortcut: ts
-    categories: news
+  # DISABLED: ANSA - Italian only
+  # - name: ansa
+  #   engine: ansa
+  #   shortcut: ans
+  #   categories: news
 
-  - name: ilpost
-    engine: il_post
-    shortcut: ilp
-    categories: news
+  # DISABLED: BPB - German only
+  # - name: bpb
+  #   engine: bpb
+  #   shortcut: bpb
+  #   categories: misc
 
-  - name: ansa
-    engine: ansa
-    shortcut: ans
-    categories: news
+  # DISABLED: Chefkoch - German only
+  # - name: chefkoch
+  #   engine: chefkoch
+  #   shortcut: ck
+  #   categories: misc
 
-  - name: bpb
-    engine: bpb
-    shortcut: bpb
-    categories: misc
+  # DISABLED: Geizhals - German only
+  # - name: geizhals
+  #   engine: geizhals
+  #   shortcut: gz
+  #   categories: misc
 
-  - name: chefkoch
-    engine: chefkoch
-    shortcut: ck
-    categories: misc
+  # DISABLED: SearchMySite - Timeout issues
+  # - name: searchmysite
+  #   engine: xpath
+  #   shortcut: sms
+  #   categories: [general, misc]
 
-  - name: geizhals
-    engine: geizhals
-    shortcut: gz
-    categories: misc
-
-  - name: habrahabr
-    engine: xpath
-    shortcut: habr
-    categories: [it, misc]
-    paging: true
-    search_url: https://habr.com/en/search/?q={query}&page={pageno}
-    results_xpath: //article[contains(@class,'tm-articles')]
-    url_xpath: .//a/@href
-    title_xpath: .//h2/a
-    content_xpath: .//p
-    timeout: 8.0
-
-  - name: searchmysite
-    engine: xpath
-    shortcut: sms
-    categories: [general, misc]
-    paging: true
-    search_url: https://searchmysite.net/search/?q={query}&page={pageno}
-    results_xpath: //div[@class="result"]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//p
-    timeout: 8.0
-
-  - name: rightdao
-    engine: xpath
-    shortcut: rd
-    categories: general
-    paging: true
-    search_url: https://rightdao.com/search?q={query}&page={pageno}
-    results_xpath: //div[@class="result"]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//p
-    timeout: 8.0
+  # DISABLED: RightDao - Proxy issues
+  # - name: rightdao
+  #   engine: xpath
+  #   shortcut: rd
+  #   categories: general
 
 # ============================================================
-# SEARCH SETTINGS
+# SEARCH SETTINGS - FIXED
 # ============================================================
 search:
   safe_search: 0
@@ -1310,13 +1171,13 @@ server:
     Referrer-Policy: no-referrer
 
 # ============================================================
-# UI SETTINGS - YOUR PREFERENCES ENABLED
+# UI SETTINGS
 # ============================================================
 ui:
   static_path: ""
   templates_path: ""
-  query_in_title: true           # CHANGED: true (was false)
-  infinite_scroll: true          # CHANGED: true (was false)
+  query_in_title: true
+  infinite_scroll: true
   default_theme: simple
   center_alignment: false
   default_locale: ""
@@ -1325,7 +1186,7 @@ ui:
   url_formatting: pretty
 
 # ============================================================
-# OUTGOING REQUESTS
+# OUTGOING REQUESTS - PROXY FIX
 # ============================================================
 outgoing:
   request_timeout: 12.0
@@ -1333,9 +1194,18 @@ outgoing:
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: true
+  # PROXY CONFIGURATION:
+  # Option 1: Disable proxy for now (recommended for testing)
+  # proxies: {}
+  
+  # Option 2: Keep proxy but with better error handling
+  # If proxy fails, engines will be suspended temporarily
   proxies:
      http: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
      https: "http://nrjjxhvq-rotate:fu1ex5d5925r@p.webshare.io:80"
+  
+  # Option 3: Use proxy only for specific engines (advanced)
+  # See: https://docs.searxng.org/admin/settings/settings_outgoing.html
 
 # ============================================================
 # PLUGINS
@@ -1348,8 +1218,6 @@ plugins:
   searx.plugins.self_info.SXNGPlugin:
     active: true
   searx.plugins.unit_converter.SXNGPlugin:
-    active: true
-  searx.plugins.ahmia_filter.SXNGPlugin:
     active: true
   searx.plugins.hostnames.SXNGPlugin:
     active: true
