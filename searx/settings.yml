@@ -16,16 +16,12 @@ categories_as_tabs:
   news:
   science:
   files:
-  dev:
-  music:
-  map:
   it:
-  social media:
 
 engines:
 
   # ============================================================
-  # GENERAL (Core - Proven Working)
+  # GENERAL (Stable - No Brave)
   # ============================================================
   
   - name: google
@@ -33,477 +29,234 @@ engines:
     shortcut: go
     categories: general
     use_mobile_ui: false
+    timeout: 10.0
+    safesearch: 0
 
   - name: bing
     engine: bing
     shortcut: bi
     categories: general
+    timeout: 10.0
+    safesearch: 0
 
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
     categories: general
+    timeout: 10.0
+    safesearch: 0
 
-  - name: brave
-    engine: brave
-    shortcut: br
-    categories: general
-    timeout: 5.0
-
-  # ADDED: Startpage - Privacy-focused Google results
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: general
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: Qwant - European privacy search
-  - name: qwant
-    engine: qwant
-    shortcut: qw
-    categories: general
-    timeout: 5.0
-
-  # ADDED: Mojeek - Independent crawler
   - name: mojeek
     engine: mojeek
     shortcut: mj
     categories: general
-
-  # ADDED: Yahoo - General search
-  - name: yahoo
-    engine: yahoo
-    shortcut: yh
-    categories: general
-
-  # ADDED: Presearch - Decentralized search
-  - name: presearch
-    engine: presearch
-    shortcut: ps
-    categories: general
-    timeout: 5.0
-
-  # ADDED: Marginalia - Indie web search
-  - name: marginalia
-    engine: marginalia
-    shortcut: mar
-    categories: general
-    timeout: 5.0
-
-  # ADDED: Mwmbl - Community search
-  - name: mwmbl
-    engine: mwmbl
-    shortcut: mw
-    categories: general
-    timeout: 5.0
+    timeout: 10.0
+    safesearch: 0
 
   # ============================================================
-  # IMAGES (Google/Bing only - Unsplash broken)
+  # IMAGES (Google Images enabled, 15s timeout)
   # ============================================================
   
   - name: google images
     engine: google_images
     shortcut: goi
     categories: images
+    timeout: 15.0
+    safesearch: 0
 
   - name: bing images
     engine: bing_images
     shortcut: bii
     categories: images
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: Brave Images
-  - name: brave images
-    engine: brave_images
-    shortcut: bri
-    categories: images
-    timeout: 5.0
-
-  # ADDED: Qwant Images
   - name: qwant images
     engine: qwant_images
     shortcut: qwi
     categories: images
-
-  # ADDED: Wallhaven - High quality wallpapers
-  - name: wallhaven
-    engine: wallhaven
-    shortcut: wh
-    categories: images
+    timeout: 10.0
+    safesearch: 0
 
   # ============================================================
-  # VIDEOS (YouTube + alternatives)
+  # VIDEOS (Stable)
   # ============================================================
   
   - name: youtube_noapi
     engine: youtube_noapi
     shortcut: yt
     categories: videos
+    timeout: 10.0
+    safesearch: 0
 
   - name: bing videos
     engine: bing_videos
     shortcut: biv
     categories: videos
+    timeout: 10.0
+    safesearch: 0
 
-  - name: google videos
-    engine: google_videos
-    shortcut: gov
-    categories: videos
-
-  # ENABLED: PeerTube - Federated video platform
-  - name: peertube
-    engine: peertube
-    shortcut: pt
-    categories: videos
-    base_url: https://peertube.biz/
-
-  # ENABLED: Odysee - Decentralized video
-  - name: odysee
-    engine: odysee
-    shortcut: od
-    categories: videos
-
-  # ADDED: Dailymotion
   - name: dailymotion
     engine: dailymotion
     shortcut: dm
     categories: videos
-
-  # ADDED: Piped - YouTube frontend
-  - name: piped
-    engine: piped
-    shortcut: pp
+    timeout: 10.0
+    safesearch: 0
+  - name: google videos
+    engine: google_videos
+    shortcut: gov
     categories: videos
-    base_url: https://piped.video/
-
-  # ADDED: Brave Videos
-  - name: brave videos
-    engine: brave_videos
-    shortcut: brv
-    categories: videos
-    timeout: 5.0
+    timeout: 10.0
+    safesearch: 0
 
   # ============================================================
-  # NEWS (Test individually - many broken)
+  # NEWS (Reuters removed - HTTP errors, stable alternatives)
   # ============================================================
   
-  # DISABLED: Google News - Parsing error in logs
-  # - name: google news
-  #   engine: google_news
-  #   shortcut: gon
-  #   categories: news
-
-  # ENABLED: Bing News
   - name: bing news
     engine: bing_news
     shortcut: bin
     categories: news
+    timeout: 10.0
+    safesearch: 0
 
-  # ENABLED: Yahoo News
-  - name: yahoo news
-    engine: yahoo_news
-    shortcut: yhn
+  # REMOVED: Reuters - causing HTTP errors
+  # REMOVED: Yahoo News - often unstable
+  
+  # ADDED: DuckDuckGo News - stable alternative
+  - name: duckduckgo news
+    engine: duckduckgo_extra
+    shortcut: ddn
     categories: news
+    timeout: 10.0
+    safesearch: 0
 
-  # ENABLED: Reuters
-  - name: reuters
-    engine: reuters
-    shortcut: reu
+  # ADDED: Startpage News - stable
+  - name: startpage news
+    engine: startpage
+    shortcut: spn
     categories: news
-
-  # DISABLED: Tagesschau - German only, niche
-  # - name: tagesschau
-  #   engine: tagesschau
-  #   shortcut: ts
-  #   categories: news
-
-  # ADDED: Tagesschau (ENABLED)
-  - name: tagesschau
-    engine: tagesschau
-    shortcut: ts
-    categories: news
+    timeout: 10.0
+    safesearch: 0
 
   # ============================================================
-  # SCIENCE (arXiv works, others test)
+  # SCIENCE (Stable)
   # ============================================================
   
   - name: arxiv
     engine: arxiv
     shortcut: arx
     categories: science
-    timeout: 4.0
+    timeout: 10.0
+    safesearch: 0
 
   - name: pubmed
     engine: pubmed
     shortcut: pub
     categories: science
-    timeout: 3.0
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: Semantic Scholar - AI-powered academic search
-  - name: semantic scholar
-    engine: semantic_scholar
-    shortcut: sem
-    categories: science
-    timeout: 5.0
-
-  # ADDED: OpenAlex - Open academic graph
-  - name: openalex
-    engine: openalex
-    shortcut: oa
-    categories: science
-    timeout: 5.0
-
-  # ADDED: Crossref - Academic DOI search
-  - name: crossref
-    engine: crossref
-    shortcut: cr
-    categories: science
-    timeout: 5.0
-
-  # ADDED: CORE - Open access research
-  - name: core
-    engine: core
-    shortcut: cor
-    categories: science
-    timeout: 5.0
-
-  # ADDED: Astrophysics Data System
-  - name: ads
-    engine: ads
-    shortcut: ads
-    categories: science
-
-  # ENABLED: Anna's Archive - Shadow library search
-  - name: annas archive
-    engine: annas_archive
-    shortcut: an
-    categories: files
-
-  # DISABLED: Library Genesis - File not found, legal risk
-  # - name: library genesis
-  #   engine: xpath
-  #   shortcut: lg
-  #   categories: files
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: [general, science]
+    timeout: 10.0
+    safesearch: 0
 
   # ============================================================
-  # FILES / DOWNLOADS
+  # FILES (Fixed - Working torrent/search engines only)
   # ============================================================
 
-  # ADDED: BT4G - Torrent search
+  # FIXED: BT4G - working torrent search
   - name: bt4g
     engine: bt4g
     shortcut: bt
     categories: files
     timeout: 10.0
+    safesearch: 0
 
-  # ADDED: 1337x - Torrent search (if available in your version)
-  # - name: 1337x
-  #   engine: 1337x
-  #   shortcut: 1337
-  #   categories: files
+  # ADDED: Solid Torrents - stable alternative
+  - name: solidtorrents
+    engine: solidtorrents
+    shortcut: st
+    categories: files
+    timeout: 10.0
+    safesearch: 0
 
-  # ============================================================
-  # REGIONAL (Test carefully)
-  # ============================================================
-  
-  # TEST: Yandex - Likely blocked by datacenter IP
-  - name: yandex
-    engine: yandex
-    shortcut: ya
-    categories: general
-
-  # DISABLED: Baidu - Requires Chinese phone verification
-  # - name: baidu
-  #   engine: baidu
-  #   shortcut: bd
-  #   categories: general
-
-  # DISABLED: Naver - XPath engine, needs full config
-  # - name: naver
-  #   engine: xpath
-  #   shortcut: nv
-  #   categories: general
-
-  # ENABLED: Seznam - Czech search engine
-  - name: seznam
-    engine: seznam
-    shortcut: szn
-    categories: general
+  # ADDED: Pirate Bay - if available in your region
+  - name: piratebay
+    engine: piratebay
+    shortcut: tp
+    categories: files
+    timeout: 10.0
+    safesearch: 0
+    # Note: Requires proxy in some regions
 
   # ============================================================
-  # DEV (GitHub + alternatives)
+  # IT/Dev (Fixed - No Brave, stable dev engines)
   # ============================================================
   
   - name: github
     engine: github
     shortcut: gh
-    categories: dev
+    categories: it
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: GitLab
   - name: gitlab
     engine: gitlab
     shortcut: gl
-    categories: dev
-
-  # ADDED: Gitea
-  - name: gitea
-    engine: gitea
-    shortcut: gt
-    categories: dev
-
-  # ADDED: SourceHut
-  - name: sourcehut
-    engine: sourcehut
-    shortcut: sh
-    categories: dev
-
-  # ADDED: Repology - Package repository tracker
-  - name: repology
-    engine: repology
-    shortcut: rp
-    categories: dev
-
-  # ADDED: Alpine Linux Packages
-  - name: alpine linux packages
-    engine: alpine_linux_packages
-    shortcut: alp
-    categories: dev
-
-  # ADDED: Arch Linux Packages
-  - name: arch linux
-    engine: archlinux
-    shortcut: al
-    categories: dev
-
-  # ADDED: Void Linux Packages
-  - name: void linux
-    engine: void_linux
-    shortcut: void
-    categories: dev
-
-  # ADDED: Hugging Face
-  - name: hugging face
-    engine: huggingface
-    shortcut: hf
-    categories: dev
-    timeout: 5.0
-
-  # ============================================================
-  # SOCIAL MEDIA / COMMUNITY
-  # ============================================================
-
-  # ADDED: Mastodon
-  - name: mastodon
-    engine: mastodon
-    shortcut: md
-    categories: social media
-
-  # ADDED: Lemmy
-  - name: lemmy
-    engine: lemmy
-    shortcut: lm
-    categories: social media
-
-  # ADDED: Matrix Rooms Search
-  - name: matrix rooms
-    engine: matrixrooms
-    shortcut: mx
-    categories: social media
-
-  # ============================================================
-  # MUSIC / AUDIO
-  # ============================================================
-
-  # ADDED: SoundCloud
-  - name: soundcloud
-    engine: soundcloud
-    shortcut: sc
-    categories: music
-
-  # ADDED: Radio Browser
-  - name: radio browser
-    engine: radio_browser
-    shortcut: rb
-    categories: music
-
-  # ============================================================
-  # KNOWLEDGE / REFERENCE
-  # ============================================================
-
-  # ADDED: Wikipedia
-  - name: wikipedia
-    engine: wikipedia
-    shortcut: wp
-    categories: general
-
-  # ADDED: Wikidata
-  - name: wikidata
-    engine: wikidata
-    shortcut: wd
-    categories: general
-
-  # ADDED: Open Library
-  - name: open library
-    engine: openlibrary
-    shortcut: ol
-    categories: general
-
-  # ADDED: Library of Congress
-  - name: library of congress
-    engine: loc
-    shortcut: loc
-    categories: general
-
-  # ============================================================
-  # IT / TECHNOLOGY
-  # ============================================================
-
-  # ADDED: Azure Resources
-  - name: azure
-    engine: azure
-    shortcut: az
     categories: it
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: Docker Hub
-  - name: docker hub
-    engine: docker_hub
-    shortcut: dh
-    categories: it
-
-  # ADDED: Stack Overflow (via StackExchange)
+  # FIXED: StackOverflow via stackexchange engine
   - name: stackoverflow
     engine: stackexchange
     shortcut: so
     categories: it
     api_site: 'stackoverflow'
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: Super User (via StackExchange)
-  - name: superuser
-    engine: stackexchange
-    shortcut: su
+  # ADDED: MDN Web Docs - stable IT resource
+  - name: mdn
+    engine: json_engine
+    shortcut: mdn
     categories: it
-    api_site: 'superuser'
+    paging: true
+    search_url: https://developer.mozilla.org/api/v1/search?q={query}&page={pageno}
+    results_query: documents
+    url_query: mdn_url
+    url_prefix: https://developer.mozilla.org
+    title_query: title
+    content_query: summary
+    timeout: 10.0
+    safesearch: 0
 
-  # ADDED: Server Fault (via StackExchange)
-  - name: serverfault
-    engine: stackexchange
-    shortcut: sf
+  # ADDED: Docker Hub - stable
+  - name: docker hub
+    engine: docker_hub
+    shortcut: dh
     categories: it
-    api_site: 'serverfault'
+    timeout: 10.0
+    safesearch: 0
 
-  # ============================================================
-  # MAPS / LOCATION
-  # ============================================================
-
-  # ADDED: OpenStreetMap (via Nominatim)
-  - name: openstreetmap
-    engine: openstreetmap
-    shortcut: osm
-    categories: map
-
-  # ADDED: Photon - OpenStreetMap search
-  - name: photon
-    engine: photon
-    shortcut: ph
-    categories: map
+  # ADDED: Crates.io - Rust packages (stable)
+  - name: crates.io
+    engine: crates
+    shortcut: cr
+    categories: it
+    timeout: 10.0
+    safesearch: 0
 
 search:
   safe_search: 0
@@ -531,7 +284,7 @@ server:
   base_url: false
   limiter: false
   public_instance: false
-  secret_key: "your-secret-key-min-16-chars"
+  secret_key: "your-secret-key-min-16-chars-long"
   image_proxy: true
   http_protocol_version: "1.1"
   method: "GET"
@@ -554,16 +307,12 @@ ui:
   url_formatting: pretty
 
 outgoing:
-  request_timeout: 12.0
+  request_timeout: 15.0
   useragent_suffix: ""
   pool_connections: 100
   pool_maxsize: 20
-  enable_http2: true
+  enable_http2: false
   proxies: {}
-  # Enable later:
-  # proxies:
-  #   http: "http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80"
-  #   https: "http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80"
 
 plugins:
   searx.plugins.calculator.SXNGPlugin:
