@@ -1,6 +1,8 @@
 # Core packaging tools (already present)
 setuptools
 
+gunicorn==23.0.0
+
 # High-performance JSON serialization / deserialization
 msgspec==0.19.0
 
