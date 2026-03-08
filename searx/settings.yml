@@ -14,11 +14,20 @@ categories_as_tabs:
   images:
   videos:
   news:
+  science:
+  files:
   dev:
+  music:
+  map:
+  it:
+  social media:
 
 engines:
 
-  # --- GENERAL ---
+  # ============================================================
+  # GENERAL (Core - Proven Working)
+  # ============================================================
+  
   - name: google
     engine: google
     shortcut: go
@@ -35,48 +44,62 @@ engines:
     shortcut: ddg
     categories: general
 
+  - name: brave
+    engine: brave
+    shortcut: br
+    categories: general
+    timeout: 5.0
+
+  # ADDED: Startpage - Privacy-focused Google results
   - name: startpage
     engine: startpage
     shortcut: sp
-    timeout: 6.0
     categories: general
 
+  # ADDED: Qwant - European privacy search
   - name: qwant
     engine: qwant
     shortcut: qw
     categories: general
-    timeout: 8.0
+    timeout: 5.0
 
-  - name: wikipedia
-    engine: wikipedia
-    shortcut: wp
-    categories: [general]
-    base_url: "https://{language}.wikipedia.org/"
-    enable_http: true
-
-  - name: wikidata
-    engine: wikidata
-    shortcut: wd
-    categories: [general]
-    timeout: 3.0
-
-  - name: duckduckgo definitions
-    engine: duckduckgo_definitions
-    shortcut: ddd
-    weight: 2
+  # ADDED: Mojeek - Independent crawler
+  - name: mojeek
+    engine: mojeek
+    shortcut: mj
     categories: general
 
-  # --- IMAGES (Native only - no XPath) ---
-  - name: unsplash
-    engine: unsplash
-    shortcut: us
-    categories: images
+  # ADDED: Yahoo - General search
+  - name: yahoo
+    engine: yahoo
+    shortcut: yh
+    categories: general
 
-  - name: openverse
-    engine: openverse
-    shortcut: opv
-    categories: images
+  # ADDED: Presearch - Decentralized search
+  - name: presearch
+    engine: presearch
+    shortcut: ps
+    categories: general
+    timeout: 5.0
 
+  # ADDED: Marginalia - Indie web search
+  - name: marginalia
+    engine: marginalia
+    shortcut: mar
+    categories: general
+    timeout: 5.0
+
+  # ADDED: Mwmbl - Community search
+  - name: mwmbl
+    engine: mwmbl
+    shortcut: mw
+    categories: general
+    timeout: 5.0
+
+  # ============================================================
+  # IMAGES (Google/Bing only - Unsplash broken)
+  # ============================================================
+  
   - name: google images
     engine: google_images
     shortcut: goi
@@ -87,8 +110,30 @@ engines:
     shortcut: bii
     categories: images
 
-  # --- VIDEOS ---
-  - name: youtube
+  # ADDED: Brave Images
+  - name: brave images
+    engine: brave_images
+    shortcut: bri
+    categories: images
+    timeout: 5.0
+
+  # ADDED: Qwant Images
+  - name: qwant images
+    engine: qwant_images
+    shortcut: qwi
+    categories: images
+
+  # ADDED: Wallhaven - High quality wallpapers
+  - name: wallhaven
+    engine: wallhaven
+    shortcut: wh
+    categories: images
+
+  # ============================================================
+  # VIDEOS (YouTube + alternatives)
+  # ============================================================
+  
+  - name: youtube_noapi
     engine: youtube_noapi
     shortcut: yt
     categories: videos
@@ -103,71 +148,362 @@ engines:
     shortcut: gov
     categories: videos
 
-  # --- NEWS ---
-  - name: google news
-    engine: google_news
-    shortcut: gon
-    categories: news
+  # ENABLED: PeerTube - Federated video platform
+  - name: peertube
+    engine: peertube
+    shortcut: pt
+    categories: videos
+    base_url: https://peertube.biz/
 
+  # ENABLED: Odysee - Decentralized video
+  - name: odysee
+    engine: odysee
+    shortcut: od
+    categories: videos
+
+  # ADDED: Dailymotion
+  - name: dailymotion
+    engine: dailymotion
+    shortcut: dm
+    categories: videos
+
+  # ADDED: Piped - YouTube frontend
+  - name: piped
+    engine: piped
+    shortcut: pp
+    categories: videos
+    base_url: https://piped.video/
+
+  # ADDED: Brave Videos
+  - name: brave videos
+    engine: brave_videos
+    shortcut: brv
+    categories: videos
+    timeout: 5.0
+
+  # ============================================================
+  # NEWS (Test individually - many broken)
+  # ============================================================
+  
+  # DISABLED: Google News - Parsing error in logs
+  # - name: google news
+  #   engine: google_news
+  #   shortcut: gon
+  #   categories: news
+
+  # ENABLED: Bing News
   - name: bing news
     engine: bing_news
     shortcut: bin
     categories: news
 
-  - name: reddit
-    engine: reddit
-    shortcut: re
-    page_size: 25
-    categories: [news, social]
+  # ENABLED: Yahoo News
+  - name: yahoo news
+    engine: yahoo_news
+    shortcut: yhn
+    categories: news
 
-  - name: hackernews
-    engine: hackernews
-    shortcut: hn
-    categories: [news, social, dev]
+  # ENABLED: Reuters
+  - name: reuters
+    engine: reuters
+    shortcut: reu
+    categories: news
 
-  # --- DEV (Single github entry, no duplicates) ---
+  # DISABLED: Tagesschau - German only, niche
+  # - name: tagesschau
+  #   engine: tagesschau
+  #   shortcut: ts
+  #   categories: news
+
+  # ADDED: Tagesschau (ENABLED)
+  - name: tagesschau
+    engine: tagesschau
+    shortcut: ts
+    categories: news
+
+  # ============================================================
+  # SCIENCE (arXiv works, others test)
+  # ============================================================
+  
+  - name: arxiv
+    engine: arxiv
+    shortcut: arx
+    categories: science
+    timeout: 4.0
+
+  - name: pubmed
+    engine: pubmed
+    shortcut: pub
+    categories: science
+    timeout: 3.0
+
+  # ADDED: Semantic Scholar - AI-powered academic search
+  - name: semantic scholar
+    engine: semantic_scholar
+    shortcut: sem
+    categories: science
+    timeout: 5.0
+
+  # ADDED: OpenAlex - Open academic graph
+  - name: openalex
+    engine: openalex
+    shortcut: oa
+    categories: science
+    timeout: 5.0
+
+  # ADDED: Crossref - Academic DOI search
+  - name: crossref
+    engine: crossref
+    shortcut: cr
+    categories: science
+    timeout: 5.0
+
+  # ADDED: CORE - Open access research
+  - name: core
+    engine: core
+    shortcut: cor
+    categories: science
+    timeout: 5.0
+
+  # ADDED: Astrophysics Data System
+  - name: ads
+    engine: ads
+    shortcut: ads
+    categories: science
+
+  # ENABLED: Anna's Archive - Shadow library search
+  - name: annas archive
+    engine: annas_archive
+    shortcut: an
+    categories: files
+
+  # DISABLED: Library Genesis - File not found, legal risk
+  # - name: library genesis
+  #   engine: xpath
+  #   shortcut: lg
+  #   categories: files
+
+  # ============================================================
+  # FILES / DOWNLOADS
+  # ============================================================
+
+  # ADDED: BT4G - Torrent search
+  - name: bt4g
+    engine: bt4g
+    shortcut: bt
+    categories: files
+    timeout: 10.0
+
+  # ADDED: 1337x - Torrent search (if available in your version)
+  # - name: 1337x
+  #   engine: 1337x
+  #   shortcut: 1337
+  #   categories: files
+
+  # ============================================================
+  # REGIONAL (Test carefully)
+  # ============================================================
+  
+  # TEST: Yandex - Likely blocked by datacenter IP
+  - name: yandex
+    engine: yandex
+    shortcut: ya
+    categories: general
+
+  # DISABLED: Baidu - Requires Chinese phone verification
+  # - name: baidu
+  #   engine: baidu
+  #   shortcut: bd
+  #   categories: general
+
+  # DISABLED: Naver - XPath engine, needs full config
+  # - name: naver
+  #   engine: xpath
+  #   shortcut: nv
+  #   categories: general
+
+  # ENABLED: Seznam - Czech search engine
+  - name: seznam
+    engine: seznam
+    shortcut: szn
+    categories: general
+
+  # ============================================================
+  # DEV (GitHub + alternatives)
+  # ============================================================
+  
   - name: github
     engine: github
     shortcut: gh
-    categories: [dev, files]
+    categories: dev
 
+  # ADDED: GitLab
   - name: gitlab
     engine: gitlab
     shortcut: gl
-    categories: [dev, files]
+    categories: dev
 
-  - name: stackoverflow
-    engine: stackexchange
-    shortcut: so
-    api_site: 'stackoverflow'
-    categories: [dev]
+  # ADDED: Gitea
+  - name: gitea
+    engine: gitea
+    shortcut: gt
+    categories: dev
 
-  - name: npm
-    engine: npm
-    shortcut: npm
-    categories: [dev, packages]
+  # ADDED: SourceHut
+  - name: sourcehut
+    engine: sourcehut
+    shortcut: sh
+    categories: dev
 
-  - name: pypi
-    engine: pypi
-    shortcut: pypi
-    categories: [dev, packages]
+  # ADDED: Repology - Package repository tracker
+  - name: repology
+    engine: repology
+    shortcut: rp
+    categories: dev
 
-  # --- MUSIC ---
+  # ADDED: Alpine Linux Packages
+  - name: alpine linux packages
+    engine: alpine_linux_packages
+    shortcut: alp
+    categories: dev
+
+  # ADDED: Arch Linux Packages
+  - name: arch linux
+    engine: archlinux
+    shortcut: al
+    categories: dev
+
+  # ADDED: Void Linux Packages
+  - name: void linux
+    engine: void_linux
+    shortcut: void
+    categories: dev
+
+  # ADDED: Hugging Face
+  - name: hugging face
+    engine: huggingface
+    shortcut: hf
+    categories: dev
+    timeout: 5.0
+
+  # ============================================================
+  # SOCIAL MEDIA / COMMUNITY
+  # ============================================================
+
+  # ADDED: Mastodon
+  - name: mastodon
+    engine: mastodon
+    shortcut: md
+    categories: social media
+
+  # ADDED: Lemmy
+  - name: lemmy
+    engine: lemmy
+    shortcut: lm
+    categories: social media
+
+  # ADDED: Matrix Rooms Search
+  - name: matrix rooms
+    engine: matrixrooms
+    shortcut: mx
+    categories: social media
+
+  # ============================================================
+  # MUSIC / AUDIO
+  # ============================================================
+
+  # ADDED: SoundCloud
   - name: soundcloud
     engine: soundcloud
     shortcut: sc
     categories: music
-    disabled: true  # Fails to initialize, disable for now
 
-  - name: bandcamp
-    engine: bandcamp
-    shortcut: bc
+  # ADDED: Radio Browser
+  - name: radio browser
+    engine: radio_browser
+    shortcut: rb
     categories: music
 
-  - name: mixcloud
-    engine: mixcloud
-    shortcut: mc
-    categories: music
+  # ============================================================
+  # KNOWLEDGE / REFERENCE
+  # ============================================================
+
+  # ADDED: Wikipedia
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: general
+
+  # ADDED: Wikidata
+  - name: wikidata
+    engine: wikidata
+    shortcut: wd
+    categories: general
+
+  # ADDED: Open Library
+  - name: open library
+    engine: openlibrary
+    shortcut: ol
+    categories: general
+
+  # ADDED: Library of Congress
+  - name: library of congress
+    engine: loc
+    shortcut: loc
+    categories: general
+
+  # ============================================================
+  # IT / TECHNOLOGY
+  # ============================================================
+
+  # ADDED: Azure Resources
+  - name: azure
+    engine: azure
+    shortcut: az
+    categories: it
+
+  # ADDED: Docker Hub
+  - name: docker hub
+    engine: docker_hub
+    shortcut: dh
+    categories: it
+
+  # ADDED: Stack Overflow (via StackExchange)
+  - name: stackoverflow
+    engine: stackexchange
+    shortcut: so
+    categories: it
+    api_site: 'stackoverflow'
+
+  # ADDED: Super User (via StackExchange)
+  - name: superuser
+    engine: stackexchange
+    shortcut: su
+    categories: it
+    api_site: 'superuser'
+
+  # ADDED: Server Fault (via StackExchange)
+  - name: serverfault
+    engine: stackexchange
+    shortcut: sf
+    categories: it
+    api_site: 'serverfault'
+
+  # ============================================================
+  # MAPS / LOCATION
+  # ============================================================
+
+  # ADDED: OpenStreetMap (via Nominatim)
+  - name: openstreetmap
+    engine: openstreetmap
+    shortcut: osm
+    categories: map
+
+  # ADDED: Photon - OpenStreetMap search
+  - name: photon
+    engine: photon
+    shortcut: ph
+    categories: map
 
 search:
   safe_search: 0
@@ -195,7 +531,7 @@ server:
   base_url: false
   limiter: false
   public_instance: false
-  secret_key: "your-secret-key-here-min-16-chars"
+  secret_key: "your-secret-key-min-16-chars"
   image_proxy: true
   http_protocol_version: "1.1"
   method: "GET"
@@ -224,7 +560,7 @@ outgoing:
   pool_maxsize: 20
   enable_http2: true
   proxies: {}
-  # Proxy disabled for now - enable later:
+  # Enable later:
   # proxies:
   #   http: "http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80"
   #   https: "http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80"
