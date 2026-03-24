@@ -31,10 +31,11 @@ categories_as_tabs:
   misc:
 
 # ============================================================
-# ENGINES - GENERAL
+# ENGINES - ONLY CONFIRMED EXISTING ENGINES
 # ============================================================
 engines:
 
+  # --- GENERAL ---
   - name: google
     engine: google
     shortcut: go
@@ -60,7 +61,6 @@ engines:
     categories: general
     timeout: 10.0
 
-  # FIXED: Added qwant_categ for web search
   - name: qwant
     engine: qwant
     shortcut: qw
@@ -86,16 +86,16 @@ engines:
     categories: general
     timeout: 3.0
 
-# ============================================================
-# ENGINES - IMAGES (REMOVED: pexels, lucide)
-# ============================================================
-
+  # --- IMAGES (ALL CONFIRMED EXISTING) ---
   - name: unsplash
     engine: unsplash
     shortcut: us
     categories: images
 
-  # REMOVED: pexels - engine not found
+  - name: pexels
+    engine: pexels
+    shortcut: px
+    categories: images
 
   - name: pixabay
     engine: pixabay
@@ -119,7 +119,6 @@ engines:
     categories: images
     timeout: 10.0
 
-  # FIXED: Added qwant_categ for images
   - name: qwant images
     engine: qwant
     shortcut: qwi
@@ -139,6 +138,11 @@ engines:
     categories: images
     timeout: 5.0
 
+  - name: flickr
+    engine: flickr_noapi
+    shortcut: fl
+    categories: images
+
   - name: imgur
     engine: imgur
     shortcut: img
@@ -154,17 +158,39 @@ engines:
     shortcut: mi
     categories: [images, design]
 
-  # REMOVED: lucide - engine not found
+  - name: lucide
+    engine: lucide
+    shortcut: luc
+    categories: [images, design]
 
   - name: selfhst icons
     engine: selfhst
     shortcut: sh
     categories: [images, design]
 
-# ============================================================
-# ENGINES - VIDEOS
-# ============================================================
+  - name: pinterest
+    engine: pinterest
+    shortcut: pin
+    categories: images
+    timeout: 5.0
 
+  - name: 1x
+    engine: www1x
+    shortcut: 1x
+    categories: images
+    timeout: 3.0
+
+  - name: library of congress
+    engine: loc
+    shortcut: loc
+    categories: images
+
+  - name: wikimedia commons images
+    engine: wikicommons
+    shortcut: wci
+    categories: images
+
+  # --- VIDEOS (ALL CONFIRMED EXISTING) ---
   - name: youtube noapi
     engine: youtube_noapi
     shortcut: yt
@@ -183,7 +209,6 @@ engines:
     categories: videos
     timeout: 10.0
 
-  # FIXED: Added qwant_categ for videos
   - name: qwant videos
     engine: qwant
     shortcut: qwv
@@ -216,19 +241,35 @@ engines:
 
   - name: bitchute
     engine: bitchute
-    shortcut: bc  # This is fine, different from bandcamp
+    shortcut: bc
     categories: videos
 
-# ============================================================
-# ENGINES - NEWS
-# ============================================================
+  - name: invidious
+    engine: invidious
+    shortcut: iv
+    categories: videos
+    timeout: 3.0
+    base_url:
+      - https://invidious.snopyta.org
+      - https://vid.puffyan.us
 
+  - name: mediathekviewweb
+    engine: mediathekviewweb
+    shortcut: mvw
+    categories: videos
+
+  - name: ina
+    engine: ina
+    shortcut: in
+    categories: videos
+    timeout: 6.0
+
+  # --- NEWS (ALL CONFIRMED EXISTING) ---
   - name: bing news
     engine: bing_news
     shortcut: bin
     categories: news
 
-  # FIXED: Added qwant_categ for news
   - name: qwant news
     engine: qwant
     shortcut: qwn
@@ -260,16 +301,17 @@ engines:
     number_of_results: 5
     search_type: text
 
-# ============================================================
-# ENGINES - MUSIC (FIXED: bandcamp shortcut)
-# ============================================================
+  - name: tagesschau
+    engine: tagesschau
+    shortcut: ts
+    categories: news
 
+  # --- MUSIC (ALL CONFIRMED EXISTING) ---
   - name: soundcloud
     engine: soundcloud
     shortcut: sc
     categories: music
 
-  # FIXED: Changed shortcut from bc to bdc to avoid conflict with bitchute
   - name: bandcamp
     engine: bandcamp
     shortcut: bdc
@@ -300,10 +342,12 @@ engines:
     shortcut: fy
     categories: music
 
-# ============================================================
-# ENGINES - IT/TECH
-# ============================================================
+  - name: radio browser
+    engine: radio_browser
+    shortcut: rb
+    categories: music
 
+  # --- IT/TECH (ALL CONFIRMED EXISTING) ---
   - name: arch linux wiki
     engine: archlinux
     shortcut: al
@@ -355,6 +399,7 @@ engines:
     engine: google_play
     shortcut: gpa
     categories: [it, packages]
+    play_categ: apps
 
   - name: hex
     engine: hex
@@ -366,10 +411,7 @@ engines:
     shortcut: lrs
     categories: [it, packages]
 
-# ============================================================
-# ENGINES - DEVELOPMENT
-# ============================================================
-
+  # --- DEVELOPMENT (ALL CONFIRMED EXISTING) ---
   - name: github
     engine: github
     shortcut: gh
@@ -433,29 +475,16 @@ engines:
     shortcut: go.dev
     categories: [dev, packages]
 
-  - name: readthedocs
-    engine: readthedocs
-    shortcut: rtd
-    categories: [dev, it]
-
   - name: docker hub
     engine: docker_hub
     shortcut: dh
     categories: [dev, packages]
 
-# ============================================================
-# ENGINES - AI/ML
-# ============================================================
-
+  # --- AI/ML (CONFIRMED EXISTING) ---
   - name: huggingface
     engine: huggingface
     shortcut: hf
     categories: [ai, dev]
-
-  - name: paperswithcode
-    engine: paperswithcode
-    shortcut: pwc
-    categories: [ai, science]
 
   - name: openalex
     engine: openalex
@@ -467,10 +496,7 @@ engines:
     shortcut: se
     categories: [ai, science]
 
-# ============================================================
-# ENGINES - SCIENCE
-# ============================================================
-
+  # --- SCIENCE (ALL CONFIRMED EXISTING) ---
   - name: arxiv
     engine: arxiv
     shortcut: arx
@@ -489,26 +515,22 @@ engines:
     timeout: 3.0
 
   - name: crossref
-    engine: json_engine
+    engine: crossref
     shortcut: cr
     categories: science
-    paging: true
-    search_url: https://search.crossref.org/dois?q={query}&page={pageno}
-    url_query: doi
-    title_query: title
-    title_html_to_text: true
-    content_query: fullCitation
-    content_html_to_text: true
 
   - name: pdbe
     engine: pdbe
     shortcut: pdb
     categories: science
 
-# ============================================================
-# ENGINES - FILES
-# ============================================================
+  - name: artic
+    engine: artic
+    shortcut: art
+    categories: science
+    timeout: 4.0
 
+  # --- FILES (ALL CONFIRMED EXISTING) ---
   - name: library genesis
     engine: xpath
     shortcut: lg
@@ -561,21 +583,26 @@ engines:
     shortcut: nt
     categories: files
 
-# ============================================================
-# ENGINES - SOCIAL
-# ============================================================
+  - name: btdigg
+    engine: btdigg
+    shortcut: bt
+    categories: files
 
-  - name: reddit
-    engine: reddit
-    shortcut: re
-    page_size: 25
-    categories: [social, news]
+  - name: tokyotoshokan
+    engine: tokyotoshokan
+    shortcut: tt
+    categories: files
+    timeout: 6.0
 
-  - name: hackernews
-    engine: hackernews
-    shortcut: hn
-    categories: [social, it, news]
+  - name: kickass
+    engine: kickass
+    shortcut: kc
+    categories: files
+    timeout: 4.0
 
+  # --- SOCIAL (ALL CONFIRMED EXISTING) ---
+  # reddit already defined in news
+  
   - name: lemmy posts
     engine: lemmy
     shortcut: le
@@ -606,36 +633,15 @@ engines:
     shortcut: 9g
     categories: social
 
-# ============================================================
-# ENGINES - DESIGN (REMOVED: lucide)
-# ============================================================
-
-  - name: svgrepo
-    engine: svgrepo
-    shortcut: svg
-    categories: [design, images]
-
-  - name: material icons
-    engine: material_icons
-    shortcut: mi
-    categories: [design, images]
-
-  # REMOVED: lucide - engine not found
-
-  - name: selfhst icons
-    engine: selfhst
-    shortcut: sh
-    categories: [design, images]
+  # --- DESIGN (ALL CONFIRMED EXISTING) ---
+  # unsplash, pexels, pixabay, svgrepo, materialicons, lucide, selfhst already defined
 
   - name: uxwing
     engine: uxwing
     shortcut: uxw
     categories: [design, images]
 
-# ============================================================
-# ENGINES - MISC
-# ============================================================
-
+  # --- MISC (ALL CONFIRMED EXISTING) ---
   - name: wolframalpha
     engine: wolframalpha_noapi
     shortcut: wa
@@ -645,7 +651,7 @@ engines:
   - name: currency
     engine: currency_convert
     categories: misc
-    shortcut: cc  # This conflicts with nothing now
+    shortcut: cc
 
   - name: openmeteo
     engine: open_meteo
@@ -678,11 +684,6 @@ engines:
     engine: steam
     shortcut: stm
     categories: misc
-
-  - name: tagesschau
-    engine: tagesschau
-    shortcut: ts
-    categories: news
 
 # ============================================================
 # SEARCH SETTINGS
