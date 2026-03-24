@@ -15,9 +15,6 @@ brand:
   wiki_url: https://github.com/searxng/searxng/wiki
   issue_url: https://github.com/searxng/searxng/issues
 
-# ============================================================
-# CATEGORIES
-# ============================================================
 categories_as_tabs:
   general:
   images:
@@ -38,7 +35,6 @@ categories_as_tabs:
 # ============================================================
 engines:
 
-  # --- Core General Search ---
   - name: google
     engine: google
     shortcut: go
@@ -58,20 +54,12 @@ engines:
     categories: general
     timeout: 10.0
 
-  # DISABLED: Brave - causes brotli decoder crashes
-  # - name: brave
-  #   engine: brave
-  #   shortcut: brave
-  #   categories: general
-  #   timeout: 5.0
-
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: general
     timeout: 10.0
 
-  # FIXED: Use 'qwant' engine, not 'qwant_images'
   - name: qwant
     engine: qwant
     shortcut: qw
@@ -83,13 +71,6 @@ engines:
     shortcut: mjk
     categories: general
     timeout: 10.0
-
-  # DISABLED: Yandex - often blocked by datacenter IPs
-  # - name: yandex
-  #   engine: yandex
-  #   shortcut: ya
-  #   categories: general
-  #   timeout: 8.0
 
   - name: wikipedia
     engine: wikipedia
@@ -104,7 +85,7 @@ engines:
     timeout: 3.0
 
 # ============================================================
-# ENGINES - IMAGES (FIXED)
+# ENGINES - IMAGES
 # ============================================================
 
   - name: unsplash
@@ -139,7 +120,6 @@ engines:
     categories: images
     timeout: 10.0
 
-  # FIXED: Use qwant engine with images category
   - name: qwant images
     engine: qwant
     shortcut: qwi
@@ -152,12 +132,6 @@ engines:
     categories: images
     timeout: 10.0
 
-  # DISABLED: Brave images - crashes
-  # - name: brave.images
-  #   engine: brave
-  #   shortcut: bri
-  #   categories: images
-
   - name: deviantart
     engine: deviantart
     shortcut: da
@@ -167,16 +141,6 @@ engines:
   - name: imgur
     engine: imgur
     shortcut: img
-    categories: images
-
-  - name: library of congress
-    engine: loc
-    shortcut: loc
-    categories: images
-
-  - name: wikimedia commons images
-    engine: wikicommons
-    shortcut: wci
     categories: images
 
   - name: svgrepo
@@ -194,16 +158,10 @@ engines:
     shortcut: luc
     categories: [images, design]
 
-  - name: selfhst icons
-    engine: selfhst
-    shortcut: sh
-    categories: [images, design]
-
 # ============================================================
-# ENGINES - VIDEOS (FIXED)
+# ENGINES - VIDEOS
 # ============================================================
 
-  # FIXED: Use 'youtube noapi' (space, not underscore)
   - name: youtube noapi
     engine: youtube_noapi
     shortcut: yt
@@ -227,12 +185,6 @@ engines:
     shortcut: qwv
     categories: videos
     timeout: 10.0
-
-  # DISABLED: Brave videos - crashes
-  # - name: brave.videos
-  #   engine: brave
-  #   shortcut: brv
-  #   categories: videos
 
   - name: vimeo
     engine: vimeo
@@ -262,29 +214,9 @@ engines:
     shortcut: bc
     categories: videos
 
-  - name: invidious
-    engine: invidious
-    shortcut: iv
-    categories: videos
-    timeout: 3.0
-    base_url:
-      - https://invidious.snopyta.org
-      - https://vid.puffyan.us
-
-  - name: mediathekviewweb
-    engine: mediathekviewweb
-    shortcut: mvw
-    categories: videos
-
 # ============================================================
-# ENGINES - NEWS (REUTERS REMOVED)
+# ENGINES - NEWS
 # ============================================================
-
-  # DISABLED: Google news - parsing errors
-  # - name: google news
-  #   engine: google_news
-  #   shortcut: gon
-  #   categories: news
 
   - name: bing news
     engine: bing_news
@@ -295,12 +227,6 @@ engines:
     engine: qwant
     shortcut: qwn
     categories: news
-
-  # DISABLED: Brave news - crashes
-  # - name: brave.news
-  #   engine: brave
-  #   shortcut: brn
-  #   categories: news
 
   - name: startpage news
     engine: startpage
@@ -317,8 +243,6 @@ engines:
     engine: hackernews
     shortcut: hn
     categories: [news, social, it]
-
-  # REMOVED: Reuters - HTTP errors
 
   - name: wikinews
     engine: mediawiki
@@ -360,11 +284,6 @@ engines:
   - name: podcastindex
     engine: podcastindex
     shortcut: podcast
-    categories: music
-
-  - name: fyyd
-    engine: fyyd
-    shortcut: fy
     categories: music
 
 # ============================================================
@@ -761,7 +680,7 @@ search:
   safe_search: 0
   autocomplete: "duckduckgo"
   autocomplete_min: 4
-  favicon_resolver: "duckduckgo"
+  favicon_resolver: ""
   default_lang: "auto"
   ban_time_on_fail: 5
   max_ban_time_on_fail: 60
@@ -778,10 +697,10 @@ search:
     - rss
 
 # ============================================================
-# SERVER SETTINGS
+# SERVER SETTINGS (KOYEB)
 # ============================================================
 server:
-  port: 8888
+  port: 8080
   bind_address: "0.0.0.0"
   base_url: false
   limiter: false
@@ -812,7 +731,7 @@ ui:
   url_formatting: pretty
 
 # ============================================================
-# OUTGOING - PROXY DISABLED UNTIL FIXED
+# OUTGOING - WORKING PROXY CONFIG
 # ============================================================
 outgoing:
   request_timeout: 15.0
@@ -820,13 +739,13 @@ outgoing:
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: false
-  # DISABLED: Proxy credentials not working (407 error)
-  # Fix your Webshare credentials first, then uncomment:
-  # proxies:
-  #   http:
-  #     - http://USERNAME:PASSWORD@p.webshare.io:80
-  #   https:
-  #     - http://USERNAME:PASSWORD@p.webshare.io:80
+  
+  # WORKING PROXY (matches your Python script format)
+  proxies:
+    http:
+      - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
+    https:
+      - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
 
 # ============================================================
 # PLUGINS
