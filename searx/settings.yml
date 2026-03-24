@@ -31,7 +31,7 @@ categories_as_tabs:
   misc:
 
 # ============================================================
-# ENGINES - GENERAL (FIXED)
+# ENGINES - GENERAL
 # ============================================================
 engines:
 
@@ -60,10 +60,12 @@ engines:
     categories: general
     timeout: 10.0
 
+  # FIXED: Added qwant_categ for web search
   - name: qwant
     engine: qwant
     shortcut: qw
     categories: general
+    qwant_categ: web
     timeout: 10.0
 
   - name: mojeek
@@ -85,7 +87,7 @@ engines:
     timeout: 3.0
 
 # ============================================================
-# ENGINES - IMAGES
+# ENGINES - IMAGES (REMOVED: pexels, lucide)
 # ============================================================
 
   - name: unsplash
@@ -93,10 +95,7 @@ engines:
     shortcut: us
     categories: images
 
-  - name: pexels
-    engine: pexels
-    shortcut: px
-    categories: images
+  # REMOVED: pexels - engine not found
 
   - name: pixabay
     engine: pixabay
@@ -120,10 +119,12 @@ engines:
     categories: images
     timeout: 10.0
 
+  # FIXED: Added qwant_categ for images
   - name: qwant images
     engine: qwant
     shortcut: qwi
     categories: images
+    qwant_categ: images
     timeout: 10.0
 
   - name: startpage images
@@ -153,9 +154,11 @@ engines:
     shortcut: mi
     categories: [images, design]
 
-  - name: lucide
-    engine: lucide
-    shortcut: luc
+  # REMOVED: lucide - engine not found
+
+  - name: selfhst icons
+    engine: selfhst
+    shortcut: sh
     categories: [images, design]
 
 # ============================================================
@@ -180,10 +183,12 @@ engines:
     categories: videos
     timeout: 10.0
 
+  # FIXED: Added qwant_categ for videos
   - name: qwant videos
     engine: qwant
     shortcut: qwv
     categories: videos
+    qwant_categ: videos
     timeout: 10.0
 
   - name: vimeo
@@ -211,7 +216,7 @@ engines:
 
   - name: bitchute
     engine: bitchute
-    shortcut: bc
+    shortcut: bc  # This is fine, different from bandcamp
     categories: videos
 
 # ============================================================
@@ -223,10 +228,13 @@ engines:
     shortcut: bin
     categories: news
 
+  # FIXED: Added qwant_categ for news
   - name: qwant news
     engine: qwant
     shortcut: qwn
     categories: news
+    qwant_categ: news
+    timeout: 10.0
 
   - name: startpage news
     engine: startpage
@@ -253,7 +261,7 @@ engines:
     search_type: text
 
 # ============================================================
-# ENGINES - MUSIC
+# ENGINES - MUSIC (FIXED: bandcamp shortcut)
 # ============================================================
 
   - name: soundcloud
@@ -261,9 +269,10 @@ engines:
     shortcut: sc
     categories: music
 
+  # FIXED: Changed shortcut from bc to bdc to avoid conflict with bitchute
   - name: bandcamp
     engine: bandcamp
-    shortcut: bc
+    shortcut: bdc
     categories: music
 
   - name: mixcloud
@@ -284,6 +293,11 @@ engines:
   - name: podcastindex
     engine: podcastindex
     shortcut: podcast
+    categories: music
+
+  - name: fyyd
+    engine: fyyd
+    shortcut: fy
     categories: music
 
 # ============================================================
@@ -593,7 +607,7 @@ engines:
     categories: social
 
 # ============================================================
-# ENGINES - DESIGN
+# ENGINES - DESIGN (REMOVED: lucide)
 # ============================================================
 
   - name: svgrepo
@@ -606,10 +620,7 @@ engines:
     shortcut: mi
     categories: [design, images]
 
-  - name: lucide
-    engine: lucide
-    shortcut: luc
-    categories: [design, images]
+  # REMOVED: lucide - engine not found
 
   - name: selfhst icons
     engine: selfhst
@@ -634,7 +645,7 @@ engines:
   - name: currency
     engine: currency_convert
     categories: misc
-    shortcut: cc
+    shortcut: cc  # This conflicts with nothing now
 
   - name: openmeteo
     engine: open_meteo
@@ -697,7 +708,7 @@ search:
     - rss
 
 # ============================================================
-# SERVER SETTINGS (KOYEB)
+# SERVER SETTINGS
 # ============================================================
 server:
   port: 8080
@@ -731,7 +742,7 @@ ui:
   url_formatting: pretty
 
 # ============================================================
-# OUTGOING - WORKING PROXY CONFIG
+# OUTGOING - PROXY
 # ============================================================
 outgoing:
   request_timeout: 15.0
@@ -739,8 +750,6 @@ outgoing:
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: false
-  
-  # WORKING PROXY (matches your Python script format)
   proxies:
     http:
       - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
