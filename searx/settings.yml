@@ -3,261 +3,760 @@ use_default_settings: true
 general:
   debug: false
   instance_name: "StillMind"
+  privacypolicy_url: false
+  donation_url: false
+  contact_url: false
   enable_metrics: true
 
 brand:
   new_issue_url: https://github.com/searxng/searxng/issues/new
   docs_url: https://docs.searxng.org/
+  public_instances: https://searx.space
+  wiki_url: https://github.com/searxng/searxng/wiki
+  issue_url: https://github.com/searxng/searxng/issues
 
+# ============================================================
+# CATEGORIES
+# ============================================================
 categories_as_tabs:
   general:
   images:
   videos:
   news:
+  music:
+  it:
   science:
   files:
-  it:
+  social:
+  dev:
+  ai:
+  design:
+  misc:
 
+# ============================================================
+# ENGINES - GENERAL (FIXED)
+# ============================================================
 engines:
 
-  # ============================================================
-  # GENERAL (Stable - No Brave)
-  # ============================================================
-  
+  # --- Core General Search ---
   - name: google
     engine: google
     shortcut: go
     categories: general
     use_mobile_ui: false
     timeout: 10.0
-    safesearch: 0
 
   - name: bing
     engine: bing
     shortcut: bi
     categories: general
     timeout: 10.0
-    safesearch: 0
 
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
     categories: general
     timeout: 10.0
-    safesearch: 0
+
+  # DISABLED: Brave - causes brotli decoder crashes
+  # - name: brave
+  #   engine: brave
+  #   shortcut: brave
+  #   categories: general
+  #   timeout: 5.0
 
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: general
     timeout: 10.0
-    safesearch: 0
+
+  # FIXED: Use 'qwant' engine, not 'qwant_images'
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    categories: general
+    timeout: 10.0
 
   - name: mojeek
     engine: mojeek
-    shortcut: mj
+    shortcut: mjk
     categories: general
     timeout: 10.0
-    safesearch: 0
 
-  # ============================================================
-  # IMAGES (Google Images enabled, 15s timeout)
-  # ============================================================
-  
+  # DISABLED: Yandex - often blocked by datacenter IPs
+  # - name: yandex
+  #   engine: yandex
+  #   shortcut: ya
+  #   categories: general
+  #   timeout: 8.0
+
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: general
+    base_url: "https://{language}.wikipedia.org/"
+
+  - name: wikidata
+    engine: wikidata
+    shortcut: wd
+    categories: general
+    timeout: 3.0
+
+# ============================================================
+# ENGINES - IMAGES (FIXED)
+# ============================================================
+
+  - name: unsplash
+    engine: unsplash
+    shortcut: us
+    categories: images
+
+  - name: pexels
+    engine: pexels
+    shortcut: px
+    categories: images
+
+  - name: pixabay
+    engine: pixabay
+    shortcut: pxb
+    categories: images
+
+  - name: openverse
+    engine: openverse
+    shortcut: opv
+    categories: images
+
   - name: google images
     engine: google_images
     shortcut: goi
     categories: images
     timeout: 15.0
-    safesearch: 0
 
   - name: bing images
     engine: bing_images
     shortcut: bii
     categories: images
     timeout: 10.0
-    safesearch: 0
 
+  # FIXED: Use qwant engine with images category
   - name: qwant images
-    engine: qwant_images
+    engine: qwant
     shortcut: qwi
     categories: images
     timeout: 10.0
-    safesearch: 0
 
-  # ============================================================
-  # VIDEOS (Stable)
-  # ============================================================
-  
-  - name: youtube_noapi
+  - name: startpage images
+    engine: startpage
+    shortcut: spi
+    categories: images
+    timeout: 10.0
+
+  # DISABLED: Brave images - crashes
+  # - name: brave.images
+  #   engine: brave
+  #   shortcut: bri
+  #   categories: images
+
+  - name: deviantart
+    engine: deviantart
+    shortcut: da
+    categories: images
+    timeout: 5.0
+
+  - name: imgur
+    engine: imgur
+    shortcut: img
+    categories: images
+
+  - name: library of congress
+    engine: loc
+    shortcut: loc
+    categories: images
+
+  - name: wikimedia commons images
+    engine: wikicommons
+    shortcut: wci
+    categories: images
+
+  - name: svgrepo
+    engine: svgrepo
+    shortcut: svg
+    categories: [images, design]
+
+  - name: material icons
+    engine: material_icons
+    shortcut: mi
+    categories: [images, design]
+
+  - name: lucide
+    engine: lucide
+    shortcut: luc
+    categories: [images, design]
+
+  - name: selfhst icons
+    engine: selfhst
+    shortcut: sh
+    categories: [images, design]
+
+# ============================================================
+# ENGINES - VIDEOS (FIXED)
+# ============================================================
+
+  # FIXED: Use 'youtube noapi' (space, not underscore)
+  - name: youtube noapi
     engine: youtube_noapi
     shortcut: yt
     categories: videos
     timeout: 10.0
-    safesearch: 0
 
   - name: bing videos
     engine: bing_videos
     shortcut: biv
     categories: videos
     timeout: 10.0
-    safesearch: 0
 
-  - name: dailymotion
-    engine: dailymotion
-    shortcut: dm
-    categories: videos
-    timeout: 10.0
-    safesearch: 0
   - name: google videos
     engine: google_videos
     shortcut: gov
     categories: videos
     timeout: 10.0
-    safesearch: 0
 
-  # ============================================================
-  # NEWS (Reuters removed - HTTP errors, stable alternatives)
-  # ============================================================
-  
+  - name: qwant videos
+    engine: qwant
+    shortcut: qwv
+    categories: videos
+    timeout: 10.0
+
+  # DISABLED: Brave videos - crashes
+  # - name: brave.videos
+  #   engine: brave
+  #   shortcut: brv
+  #   categories: videos
+
+  - name: vimeo
+    engine: vimeo
+    shortcut: vm
+    categories: videos
+
+  - name: dailymotion
+    engine: dailymotion
+    shortcut: dm
+    categories: videos
+
+  - name: peertube
+    engine: peertube
+    shortcut: ptb
+    categories: videos
+    paging: true
+    base_url: https://peertube.biz/
+    timeout: 6.0
+
+  - name: rumble
+    engine: rumble
+    shortcut: ru
+    categories: videos
+
+  - name: bitchute
+    engine: bitchute
+    shortcut: bc
+    categories: videos
+
+  - name: invidious
+    engine: invidious
+    shortcut: iv
+    categories: videos
+    timeout: 3.0
+    base_url:
+      - https://invidious.snopyta.org
+      - https://vid.puffyan.us
+
+  - name: mediathekviewweb
+    engine: mediathekviewweb
+    shortcut: mvw
+    categories: videos
+
+# ============================================================
+# ENGINES - NEWS (REUTERS REMOVED)
+# ============================================================
+
+  # DISABLED: Google news - parsing errors
+  # - name: google news
+  #   engine: google_news
+  #   shortcut: gon
+  #   categories: news
+
   - name: bing news
     engine: bing_news
     shortcut: bin
     categories: news
-    timeout: 10.0
-    safesearch: 0
 
-  # REMOVED: Reuters - causing HTTP errors
-  # REMOVED: Yahoo News - often unstable
-  
-  # ADDED: DuckDuckGo News - stable alternative
-  - name: duckduckgo news
-    engine: duckduckgo_extra
-    shortcut: ddn
+  - name: qwant news
+    engine: qwant
+    shortcut: qwn
     categories: news
-    timeout: 10.0
-    safesearch: 0
 
-  # ADDED: Startpage News - stable
+  # DISABLED: Brave news - crashes
+  # - name: brave.news
+  #   engine: brave
+  #   shortcut: brn
+  #   categories: news
+
   - name: startpage news
     engine: startpage
     shortcut: spn
     categories: news
-    timeout: 10.0
-    safesearch: 0
 
-  # ============================================================
-  # SCIENCE (Stable)
-  # ============================================================
-  
+  - name: reddit
+    engine: reddit
+    shortcut: re
+    page_size: 25
+    categories: [news, social]
+
+  - name: hackernews
+    engine: hackernews
+    shortcut: hn
+    categories: [news, social, it]
+
+  # REMOVED: Reuters - HTTP errors
+
+  - name: wikinews
+    engine: mediawiki
+    shortcut: wn
+    categories: news
+    base_url: "https://{language}.wikinews.org/"
+    number_of_results: 5
+    search_type: text
+
+# ============================================================
+# ENGINES - MUSIC
+# ============================================================
+
+  - name: soundcloud
+    engine: soundcloud
+    shortcut: sc
+    categories: music
+
+  - name: bandcamp
+    engine: bandcamp
+    shortcut: bc
+    categories: music
+
+  - name: mixcloud
+    engine: mixcloud
+    shortcut: mc
+    categories: music
+
+  - name: genius
+    engine: genius
+    shortcut: gen
+    categories: music
+
+  - name: deezer
+    engine: deezer
+    shortcut: dz
+    categories: music
+
+  - name: podcastindex
+    engine: podcastindex
+    shortcut: podcast
+    categories: music
+
+  - name: fyyd
+    engine: fyyd
+    shortcut: fy
+    categories: music
+
+# ============================================================
+# ENGINES - IT/TECH
+# ============================================================
+
+  - name: arch linux wiki
+    engine: archlinux
+    shortcut: al
+    categories: it
+
+  - name: alpine linux packages
+    engine: alpinelinux
+    shortcut: alp
+    categories: [it, packages]
+
+  - name: void linux packages
+    engine: voidlinux
+    shortcut: void
+    categories: [it, packages]
+
+  - name: gentoo wiki
+    engine: mediawiki
+    shortcut: gtw
+    categories: it
+    base_url: https://wiki.gentoo.org/
+
+  - name: microsoft learn
+    engine: microsoft_learn
+    shortcut: msl
+    categories: it
+
+  - name: emojipedia
+    engine: emojipedia
+    shortcut: emj
+    categories: it
+
+  - name: fdroid
+    engine: fdroid
+    shortcut: fd
+    categories: [it, packages]
+
+  - name: apkmirror
+    engine: apkmirror
+    shortcut: apkm
+    categories: [it, packages]
+    timeout: 4.0
+
+  - name: apple app store
+    engine: apple_app_store
+    shortcut: aas
+    categories: [it, packages]
+
+  - name: google play apps
+    engine: google_play
+    shortcut: gpa
+    categories: [it, packages]
+
+  - name: hex
+    engine: hex
+    shortcut: hex
+    categories: [it, packages]
+
+  - name: lib.rs
+    engine: lib_rs
+    shortcut: lrs
+    categories: [it, packages]
+
+# ============================================================
+# ENGINES - DEVELOPMENT
+# ============================================================
+
+  - name: github
+    engine: github
+    shortcut: gh
+    categories: [dev, files]
+
+  - name: gitlab
+    engine: gitlab
+    shortcut: gl
+    categories: [dev, files]
+
+  - name: sourcehut
+    engine: sourcehut
+    shortcut: srht
+    categories: [dev, files]
+
+  - name: gitea.com
+    engine: gitea
+    shortcut: gitea
+    categories: [dev, files]
+
+  - name: stackoverflow
+    engine: stackexchange
+    shortcut: so
+    api_site: 'stackoverflow'
+    categories: [dev, it]
+
+  - name: askubuntu
+    engine: stackexchange
+    shortcut: ubuntu
+    api_site: 'askubuntu'
+    categories: [it, dev]
+
+  - name: superuser
+    engine: stackexchange
+    shortcut: su
+    api_site: 'superuser'
+    categories: [it, dev]
+
+  - name: searchcode code
+    engine: searchcode_code
+    shortcut: scc
+    categories: dev
+
+  - name: npm
+    engine: npm
+    shortcut: npm
+    categories: [dev, packages]
+
+  - name: pypi
+    engine: pypi
+    shortcut: pypi
+    categories: [dev, packages]
+
+  - name: metacpan
+    engine: metacpan
+    shortcut: cpan
+    categories: [dev, packages]
+
+  - name: pkg.go.dev
+    engine: pkg_go_dev
+    shortcut: go.dev
+    categories: [dev, packages]
+
+  - name: readthedocs
+    engine: readthedocs
+    shortcut: rtd
+    categories: [dev, it]
+
+  - name: docker hub
+    engine: docker_hub
+    shortcut: dh
+    categories: [dev, packages]
+
+# ============================================================
+# ENGINES - AI/ML
+# ============================================================
+
+  - name: huggingface
+    engine: huggingface
+    shortcut: hf
+    categories: [ai, dev]
+
+  - name: paperswithcode
+    engine: paperswithcode
+    shortcut: pwc
+    categories: [ai, science]
+
+  - name: openalex
+    engine: openalex
+    shortcut: oa
+    categories: [ai, science]
+
+  - name: semantic scholar
+    engine: semantic_scholar
+    shortcut: se
+    categories: [ai, science]
+
+# ============================================================
+# ENGINES - SCIENCE
+# ============================================================
+
   - name: arxiv
     engine: arxiv
     shortcut: arx
     categories: science
-    timeout: 10.0
-    safesearch: 0
+    timeout: 4.0
+
+  - name: google scholar
+    engine: google_scholar
+    shortcut: gos
+    categories: science
 
   - name: pubmed
     engine: pubmed
     shortcut: pub
     categories: science
-    timeout: 10.0
-    safesearch: 0
+    timeout: 3.0
 
-  - name: wikipedia
-    engine: wikipedia
-    shortcut: wp
-    categories: [general, science]
-    timeout: 10.0
-    safesearch: 0
+  - name: crossref
+    engine: json_engine
+    shortcut: cr
+    categories: science
+    paging: true
+    search_url: https://search.crossref.org/dois?q={query}&page={pageno}
+    url_query: doi
+    title_query: title
+    title_html_to_text: true
+    content_query: fullCitation
+    content_html_to_text: true
 
-  # ============================================================
-  # FILES (Fixed - Working torrent/search engines only)
-  # ============================================================
+  - name: pdbe
+    engine: pdbe
+    shortcut: pdb
+    categories: science
 
-  # FIXED: BT4G - working torrent search
-  - name: bt4g
-    engine: bt4g
-    shortcut: bt
+# ============================================================
+# ENGINES - FILES
+# ============================================================
+
+  - name: library genesis
+    engine: xpath
+    shortcut: lg
     categories: files
-    timeout: 10.0
-    safesearch: 0
+    search_url: https://libgen.fun/search.php?req={query}
+    url_xpath: //a[contains(@href,"get.php?md5")]/@href
+    title_xpath: //a[contains(@href,"book/")]/text()[1]
+    content_xpath: //td/a[1][contains(@href,"=author")]/text()
+    timeout: 7.0
 
-  # ADDED: Solid Torrents - stable alternative
-  - name: solidtorrents
-    engine: solidtorrents
-    shortcut: st
+  - name: annas archive
+    engine: annas_archive
+    shortcut: an
     categories: files
-    timeout: 10.0
-    safesearch: 0
 
-  # ADDED: Pirate Bay - if available in your region
+  - name: openlibrary
+    engine: openlibrary
+    shortcut: ol
+    categories: files
+
+  - name: wikisource
+    engine: mediawiki
+    shortcut: ws
+    categories: files
+    base_url: https://wikisource.org/
+
   - name: piratebay
     engine: piratebay
-    shortcut: tp
+    shortcut: tpb
     categories: files
-    timeout: 10.0
-    safesearch: 0
-    # Note: Requires proxy in some regions
 
-  # ============================================================
-  # IT/Dev (Fixed - No Brave, stable dev engines)
-  # ============================================================
-  
-  - name: github
-    engine: github
-    shortcut: gh
-    categories: it
-    timeout: 10.0
-    safesearch: 0
+  - name: 1337x
+    engine: 1337x
+    shortcut: 1337x
+    categories: files
 
-  - name: gitlab
-    engine: gitlab
-    shortcut: gl
-    categories: it
-    timeout: 10.0
-    safesearch: 0
+  - name: solidtorrents
+    engine: solidtorrents
+    shortcut: solid
+    categories: files
+    timeout: 4.0
 
-  # FIXED: StackOverflow via stackexchange engine
-  - name: stackoverflow
-    engine: stackexchange
-    shortcut: so
-    categories: it
-    api_site: 'stackoverflow'
-    timeout: 10.0
-    safesearch: 0
+  - name: bt4g
+    engine: bt4g
+    shortcut: bt4g
+    categories: files
 
-  # ADDED: MDN Web Docs - stable IT resource
-  - name: mdn
-    engine: json_engine
-    shortcut: mdn
-    categories: it
-    paging: true
-    search_url: https://developer.mozilla.org/api/v1/search?q={query}&page={pageno}
-    results_query: documents
-    url_query: mdn_url
-    url_prefix: https://developer.mozilla.org
-    title_query: title
-    content_query: summary
-    timeout: 10.0
-    safesearch: 0
+  - name: nyaa
+    engine: nyaa
+    shortcut: nt
+    categories: files
 
-  # ADDED: Docker Hub - stable
-  - name: docker hub
-    engine: docker_hub
-    shortcut: dh
-    categories: it
-    timeout: 10.0
-    safesearch: 0
+# ============================================================
+# ENGINES - SOCIAL
+# ============================================================
 
-  # ADDED: Crates.io - Rust packages (stable)
-  - name: crates.io
-    engine: crates
-    shortcut: cr
-    categories: it
-    timeout: 10.0
-    safesearch: 0
+  - name: reddit
+    engine: reddit
+    shortcut: re
+    page_size: 25
+    categories: [social, news]
 
+  - name: hackernews
+    engine: hackernews
+    shortcut: hn
+    categories: [social, it, news]
+
+  - name: lemmy posts
+    engine: lemmy
+    shortcut: le
+    categories: social
+
+  - name: mastodon users
+    engine: mastodon
+    shortcut: mau
+    categories: social
+
+  - name: mastodon hashtags
+    engine: mastodon
+    shortcut: mah
+    categories: social
+
+  - name: tootfinder
+    engine: tootfinder
+    shortcut: toot
+    categories: social
+
+  - name: sepiasearch
+    engine: sepiasearch
+    shortcut: sep
+    categories: [social, videos]
+
+  - name: 9gag
+    engine: 9gag
+    shortcut: 9g
+    categories: social
+
+# ============================================================
+# ENGINES - DESIGN
+# ============================================================
+
+  - name: svgrepo
+    engine: svgrepo
+    shortcut: svg
+    categories: [design, images]
+
+  - name: material icons
+    engine: material_icons
+    shortcut: mi
+    categories: [design, images]
+
+  - name: lucide
+    engine: lucide
+    shortcut: luc
+    categories: [design, images]
+
+  - name: selfhst icons
+    engine: selfhst
+    shortcut: sh
+    categories: [design, images]
+
+  - name: uxwing
+    engine: uxwing
+    shortcut: uxw
+    categories: [design, images]
+
+# ============================================================
+# ENGINES - MISC
+# ============================================================
+
+  - name: wolframalpha
+    engine: wolframalpha_noapi
+    shortcut: wa
+    categories: misc
+    timeout: 6.0
+
+  - name: currency
+    engine: currency_convert
+    categories: misc
+    shortcut: cc
+
+  - name: openmeteo
+    engine: open_meteo
+    shortcut: om
+    categories: misc
+
+  - name: jisho
+    engine: jisho
+    shortcut: js
+    categories: misc
+    timeout: 3.0
+
+  - name: imdb
+    engine: imdb
+    shortcut: imdb
+    categories: misc
+    timeout: 6.0
+
+  - name: rotten tomatoes
+    engine: rottentomatoes
+    shortcut: rt
+    categories: misc
+
+  - name: goodreads
+    engine: goodreads
+    shortcut: gr
+    categories: misc
+
+  - name: steam
+    engine: steam
+    shortcut: stm
+    categories: misc
+
+  - name: tagesschau
+    engine: tagesschau
+    shortcut: ts
+    categories: news
+
+# ============================================================
+# SEARCH SETTINGS
+# ============================================================
 search:
   safe_search: 0
   autocomplete: "duckduckgo"
@@ -278,13 +777,16 @@ search:
     - json
     - rss
 
+# ============================================================
+# SERVER SETTINGS
+# ============================================================
 server:
   port: 8888
   bind_address: "0.0.0.0"
   base_url: false
   limiter: false
   public_instance: false
-  secret_key: "your-secret-key-min-16-chars-long"
+  secret_key: "4Z2TOwrferScgsuejhe7883hr"
   image_proxy: true
   http_protocol_version: "1.1"
   method: "GET"
@@ -294,6 +796,9 @@ server:
     X-Robots-Tag: noindex, nofollow
     Referrer-Policy: no-referrer
 
+# ============================================================
+# UI SETTINGS
+# ============================================================
 ui:
   static_path: ""
   templates_path: ""
@@ -306,34 +811,26 @@ ui:
   hotkeys: default
   url_formatting: pretty
 
+# ============================================================
+# OUTGOING - PROXY DISABLED UNTIL FIXED
+# ============================================================
 outgoing:
   request_timeout: 15.0
   useragent_suffix: ""
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: false
-  
-  # Rotating proxy
-  proxies:
-    http:
-      - http://udizufzc-rotate:2ile7xfivj@p.webshare.io:80
-    https:
-      - http://udizufzc-rotate:2ile7xfivj@p.webshare.io:80
-  
-  # Request headers to mimic real browser
-  headers:
-    User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.0"
-    Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-    Accept-Language: "en-US,en;q=0.9"
-    Accept-Encoding: "gzip, deflate, br"
-    Referer: "https://www.google.com/"
-    DNT: "1"
-    Upgrade-Insecure-Requests: "1"
-    Sec-Fetch-Dest: "document"
-    Sec-Fetch-Mode: "navigate"
-    Sec-Fetch-Site: "none"
-    Sec-Fetch-User: "?1"
+  # DISABLED: Proxy credentials not working (407 error)
+  # Fix your Webshare credentials first, then uncomment:
+  # proxies:
+  #   http:
+  #     - http://USERNAME:PASSWORD@p.webshare.io:80
+  #   https:
+  #     - http://USERNAME:PASSWORD@p.webshare.io:80
 
+# ============================================================
+# PLUGINS
+# ============================================================
 plugins:
   searx.plugins.calculator.SXNGPlugin:
     active: true
@@ -352,6 +849,9 @@ plugins:
   searx.plugins.tracker_url_remover.SXNGPlugin:
     active: true
 
+# ============================================================
+# DOI RESOLVERS
+# ============================================================
 doi_resolvers:
   oadoi.org: 'https://oadoi.org/'
   doi.org: 'https://doi.org/'
