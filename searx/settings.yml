@@ -173,8 +173,6 @@ outgoing:
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: false
-  proxies:{}
-  # REMOVED: headers section doesn't exist in SearxNG
 
 plugins:
   searx.plugins.calculator.SXNGPlugin:
