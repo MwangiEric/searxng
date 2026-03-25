@@ -1,7 +1,7 @@
 use_default_settings: true
 
 general:
-  debug: false
+  debug: true
   instance_name: "StillMind"
   enable_metrics: true
 
@@ -173,11 +173,7 @@ outgoing:
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: false
-  proxies:
-    http:
-      - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
-    https:
-      - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
+  proxies:{}
   # REMOVED: headers section doesn't exist in SearxNG
 
 plugins:
