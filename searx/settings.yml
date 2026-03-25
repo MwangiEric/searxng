@@ -1,93 +1,191 @@
 use_default_settings: true
 
 general:
-  debug: true
+  debug: false
   instance_name: "StillMind"
+  privacypolicy_url: false
+  donation_url: false
+  contact_url: false
   enable_metrics: true
 
 brand:
   new_issue_url: https://github.com/searxng/searxng/issues/new
   docs_url: https://docs.searxng.org/
+  public_instances: https://searx.space
+  wiki_url: https://github.com/searxng/searxng/wiki
+  issue_url: https://github.com/searxng/searxng/issues
 
 categories_as_tabs:
   general:
   images:
   videos:
   news:
+  music:
+  it:
   science:
   files:
-  it:
+  social:
+  dev:
+  ai:
+  design:
+  misc:
 
 engines:
+  # --- GENERAL (Native) ---
   - name: google
     engine: google
     shortcut: go
     categories: general
+    use_mobile_ui: false
+    timeout: 10.0
 
   - name: bing
     engine: bing
     shortcut: bi
     categories: general
+    timeout: 10.0
 
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
     categories: general
+    timeout: 10.0
 
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: general
+    timeout: 10.0
 
   - name: qwant
     engine: qwant
     shortcut: qw
     categories: general
     qwant_categ: web
+    timeout: 10.0
 
   - name: wikipedia
     engine: wikipedia
     shortcut: wp
     categories: general
+    base_url: "https://{language}.wikipedia.org/"
 
+  # --- GENERAL (XPath) ---
+  - name: rightdao
+    engine: xpath
+    shortcut: rd
+    categories: general
+    paging: true
+    search_url: https://rightdao.com/search?q={query}&page={pageno}
+    results_xpath: //div[@class="result"]
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: searchmysite
+    engine: xpath
+    shortcut: sms
+    categories: general
+    paging: true
+    search_url: https://searchmysite.net/search/?q={query}&page={pageno}
+    results_xpath: //div[@class="result"]
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    timeout: 10.0
+
+  # --- IMAGES (Native) ---
   - name: google images
     engine: google_images
     shortcut: goi
     categories: images
+    timeout: 15.0
 
   - name: bing images
     engine: bing_images
     shortcut: bii
     categories: images
+    timeout: 10.0
 
-  # FIXED: Use qwant not qwant_images
   - name: qwant images
     engine: qwant
     shortcut: qwi
     categories: images
     qwant_categ: images
+    timeout: 10.0
 
-  # FIXED: Space not underscore
+  # --- IMAGES (XPath) ---
+  - name: freepik
+    engine: xpath
+    shortcut: fp
+    categories: [images, design]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.freepik.com/search?format=search&query={query}&type=photo
+    results_xpath: //figure[contains(@class,'showcase__item')]
+    url_xpath: .//a/@href
+    title_xpath: .//a/@title
+    content_xpath: .//img/@alt
+    thumbnail_xpath: .//img/@data-src
+    timeout: 10.0
+
+  - name: rawpixel
+    engine: xpath
+    shortcut: raw
+    categories: [images, design]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.rawpixel.com/search/{query}?sort=curated&mode=free&page={pageno}
+    results_xpath: //div[contains(@class,'grid-item')]
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    content_xpath: .//img/@alt
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: stocksnap
+    engine: xpath
+    shortcut: ss
+    categories: images
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://stocksnap.io/search/{query}?page={pageno}
+    results_xpath: //a[contains(@class,'photo-grid-item')]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    content_xpath: ./img/@src
+    thumbnail_xpath: ./img/@src
+    timeout: 10.0
+
+  # --- VIDEOS (Native) ---
   - name: youtube noapi
     engine: youtube_noapi
     shortcut: yt
     categories: videos
+    timeout: 10.0
 
   - name: bing videos
     engine: bing_videos
     shortcut: biv
     categories: videos
+    timeout: 10.0
 
   - name: google videos
     engine: google_videos
     shortcut: gov
     categories: videos
+    timeout: 10.0
 
   - name: dailymotion
     engine: dailymotion
     shortcut: dm
     categories: videos
 
+  # --- NEWS (Native) ---
   - name: bing news
     engine: bing_news
     shortcut: bin
@@ -98,11 +196,106 @@ engines:
     shortcut: spn
     categories: news
 
-  # REMOVED: duckduckgo_extra doesn't exist
+  - name: reddit
+    engine: reddit
+    shortcut: re
+    categories: [news, social]
 
+  - name: hackernews
+    engine: hackernews
+    shortcut: hn
+    categories: [news, it]
+
+  # --- NEWS (XPath) ---
+  - name: bbc
+    engine: xpath
+    shortcut: bbc
+    categories: news
+    paging: false
+    search_url: https://www.bbc.co.uk/search?q={query}
+    results_xpath: //div[contains(@class,'ssrcss-')]
+    url_xpath: .//a/@href
+    title_xpath: .//h2
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: guardian
+    engine: xpath
+    shortcut: grd
+    categories: news
+    paging: true
+    search_url: https://www.theguardian.com/search?q={query}&page={pageno}
+    results_xpath: //li[contains(@class,'fc-slice__item')]
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//p
+    timeout: 10.0
+
+  # --- MUSIC (Native) ---
+  - name: soundcloud
+    engine: soundcloud
+    shortcut: sc
+    categories: music
+
+  - name: bandcamp
+    engine: bandcamp
+    shortcut: bdc
+    categories: music
+
+  # --- DEV (Native) ---
+  - name: github
+    engine: github
+    shortcut: gh
+    categories: dev
+
+  - name: gitlab
+    engine: gitlab
+    shortcut: gl
+    categories: dev
+
+  - name: stackoverflow
+    engine: stackexchange
+    shortcut: so
+    api_site: 'stackoverflow'
+    categories: [dev, it]
+
+  # --- DEV (XPath) ---
+  - name: codeberg
+    engine: xpath
+    shortcut: cb
+    categories: [dev, files]
+    search_url: https://codeberg.org/api/v1/repos/search?q={query}&limit=10
+    url_query: html_url
+    title_query: name
+    content_query: description
+
+  - name: gitlab snippets
+    engine: xpath
+    shortcut: gls
+    categories: dev
+    paging: true
+    search_url: https://gitlab.com/search?search={query}&scope=snippets&page={pageno}
+    results_xpath: //li[contains(@class,'snippet-row')]
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//p
+    timeout: 10.0
+
+  # --- IT (Native) ---
+  - name: arch linux wiki
+    engine: archlinux
+    shortcut: al
+    categories: it
+
+  # --- SCIENCE (Native) ---
   - name: arxiv
     engine: arxiv
     shortcut: arx
+    categories: science
+
+  - name: google scholar
+    engine: google_scholar
+    shortcut: gos
     categories: science
 
   - name: pubmed
@@ -110,69 +303,115 @@ engines:
     shortcut: pub
     categories: science
 
-  - name: bt4g
-    engine: bt4g
-    shortcut: bt
-    categories: files
+  - name: openalex
+    engine: openalex
+    shortcut: oa
+    categories: science
 
-  - name: solidtorrents
-    engine: solidtorrents
-    shortcut: st
+  - name: semantic scholar
+    engine: semantic_scholar
+    shortcut: se
+    categories: science
+
+  # --- FILES (Native) ---
+  - name: annas archive
+    engine: annas_archive
+    shortcut: an
     categories: files
 
   - name: piratebay
     engine: piratebay
-    shortcut: tp
+    shortcut: tpb
     categories: files
 
-  - name: github
-    engine: github
-    shortcut: gh
-    categories: it
+  - name: 1337x
+    engine: 1337x
+    shortcut: 1337x
+    categories: files
 
-  - name: gitlab
-    engine: gitlab
-    shortcut: gl
-    categories: it
+  - name: solidtorrents
+    engine: solidtorrents
+    shortcut: solid
+    categories: files
 
-  - name: stackoverflow
-    engine: stackexchange
-    shortcut: so
-    api_site: 'stackoverflow'
-    categories: it
+  - name: bt4g
+    engine: bt4g
+    shortcut: bt4g
+    categories: files
+
+  # --- FILES (XPath) ---
+  - name: lime torrents
+    engine: xpath
+    shortcut: lime
+    categories: files
+    paging: true
+    search_url: https://www.limetorrents.lol/search/all/{query}/seeds/{pageno}/
+    results_xpath: //table[contains(@class,'table2')]//tr[position()>1]
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//td[2]
+    timeout: 10.0
 
 search:
   safe_search: 0
   autocomplete: "duckduckgo"
   autocomplete_min: 4
-  favicon_resolver: ""  # FIXED: Empty to avoid favicons.toml
+  favicon_resolver: "duckduckgo"
   default_lang: "auto"
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 60
+  suspended_times:
+    SearxEngineAccessDenied: 3600
+    SearxEngineCaptcha: 3600
+    SearxEngineTooManyRequests: 5
+    cf_SearxEngineCaptcha: 86400
+    cf_SearxEngineAccessDenied: 86400
+    recaptcha_SearxEngineCaptcha: 604800
   formats:
     - html
     - json
     - rss
 
 server:
-  port: 8080  # FIXED: Koyeb uses 8080
+  port: 8888
   bind_address: "0.0.0.0"
   base_url: false
-  limiter: false
+  limiter: true
   public_instance: false
-  secret_key: "your-secret-key-min-16-chars-long!!"  # FIXED: 16+ chars
+  secret_key: "4Z2TOwrferScgsuejhe7883hr!!"
   image_proxy: true
   http_protocol_version: "1.1"
+  method: "GET"
+  default_http_headers:
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Robots-Tag: noindex, nofollow
+    Referrer-Policy: no-referrer
 
 ui:
+  static_path: ""
+  templates_path: ""
   query_in_title: true
-  infinite_scroll: true
+  infinite_scroll: false
   default_theme: simple
-  search_on_category_select: true
+  center_alignment: false
+  default_locale: ""
+  search_on_category_select: false
+  hotkeys: default
+  url_formatting: pretty
 
 outgoing:
   request_timeout: 15.0
+  # Default user agent - no suffix
+  useragent_suffix: ""
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: false
+  proxies:
+    http:
+      - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
+    https:
+      - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
 
 plugins:
   searx.plugins.calculator.SXNGPlugin:
