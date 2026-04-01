@@ -28,10 +28,16 @@ categories_as_tabs:
   dev:
   ai:
   design:
+  tools:
+  packages:
+  docs:
+  alternatives:
   misc:
 
 engines:
-  # --- GENERAL (Native) ---
+  # ============================================================= #
+  #  GENERAL SEARCH - Native Engines
+  # ============================================================= #
   - name: google
     engine: google
     shortcut: go
@@ -70,24 +76,22 @@ engines:
     categories: general
     base_url: "https://{language}.wikipedia.org/"
 
-  # --- GENERAL (XPath) ---
-  - name: rightdao
-    engine: xpath
-    shortcut: rd
+  - name: brave
+    engine: brave
+    shortcut: brave
     categories: general
-    paging: true
-    search_url: https://rightdao.com/search?q={query}&page={pageno}
-    results_xpath: //div[@class="result"]
-    url_xpath: .//a/@href
-    title_xpath: .//h3
-    content_xpath: .//p
     timeout: 10.0
 
+  # ============================================================= #
+  #  GENERAL SEARCH - Custom XPath
+  # ============================================================= #
   - name: searchmysite
     engine: xpath
     shortcut: sms
     categories: general
     paging: true
+    first_page_num: 1
+    page_size: 10
     search_url: https://searchmysite.net/search/?q={query}&page={pageno}
     results_xpath: //div[@class="result"]
     url_xpath: .//a/@href
@@ -95,7 +99,35 @@ engines:
     content_xpath: .//p
     timeout: 10.0
 
-  # --- IMAGES (Native) ---
+  - name: mojeek
+    engine: xpath
+    shortcut: mjk
+    categories: general
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://www.mojeek.com/search?q={query}&s={pageno}
+    results_xpath: //li[@class='result']
+    url_xpath: .//a[@class='ob']/@href
+    title_xpath: .//a[@class='ob']
+    content_xpath: .//p[@class='s']
+    timeout: 10.0
+
+  - name: wiby
+    engine: xpath
+    shortcut: wib
+    categories: [general, misc]
+    paging: false
+    search_url: https://wiby.me/?q={query}
+    results_xpath: //div[@class='result']
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//p
+    timeout: 10.0
+
+  # ============================================================= #
+  #  IMAGES - Native Engines
+  # ============================================================= #
   - name: google images
     engine: google_images
     shortcut: goi
@@ -115,7 +147,19 @@ engines:
     qwant_categ: images
     timeout: 10.0
 
-  # --- IMAGES (XPath) ---
+  - name: unsplash
+    engine: unsplash
+    shortcut: us
+    categories: images
+
+  - name: flickr
+    engine: flickr_noapi
+    shortcut: fl
+    categories: images
+
+  # ============================================================= #
+  #  IMAGES - Custom XPath
+  # ============================================================= #
   - name: freepik
     engine: xpath
     shortcut: fp
@@ -123,7 +167,7 @@ engines:
     paging: true
     first_page_num: 1
     page_size: 20
-    search_url: https://www.freepik.com/search?format=search&query={query}&type=photo
+    search_url: https://www.freepik.com/search?format=search&query={query}&type=photo&page={pageno}
     results_xpath: //figure[contains(@class,'showcase__item')]
     url_xpath: .//a/@href
     title_xpath: .//a/@title
@@ -161,7 +205,96 @@ engines:
     thumbnail_xpath: ./img/@src
     timeout: 10.0
 
-  # --- VIDEOS (Native) ---
+  - name: pixabay
+    engine: xpath
+    shortcut: pxb
+    categories: images
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://pixabay.com/images/search/{query}/?pagi={pageno}
+    results_xpath: //div[@data-testid="item"]
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: pexels
+    engine: xpath
+    shortcut: px
+    categories: images
+    paging: true
+    first_page_num: 1
+    page_size: 30
+    search_url: https://www.pexels.com/search/{query}/?page={pageno}
+    results_xpath: //article[@data-testid='photo-grid-item']//a[1]
+    url_xpath: ./@href
+    title_xpath: ./img/@alt
+    thumbnail_xpath: ./img/@src
+    timeout: 10.0
+
+  # ============================================================= #
+  #  DESIGN ASSETS - Icons, Vectors, Templates
+  # ============================================================= #
+  - name: flaticon
+    engine: xpath
+    shortcut: fi
+    categories: [design, images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.flaticon.com/search?word={query}&page={pageno}
+    results_xpath: //li[@class='icon--item']
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    thumbnail_xpath: .//img/@data-src
+    timeout: 10.0
+
+  - name: iconfinder
+    engine: xpath
+    shortcut: icf
+    categories: [design, images]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.iconfinder.com/search?q={query}&price=free&page={pageno}
+    results_xpath: //div[@data-testid='icon-grid-item']
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: svgrepo
+    engine: xpath
+    shortcut: svg
+    categories: [design, images]
+    paging: true
+    first_page_num: 1
+    page_size: 30
+    search_url: https://www.svgrepo.com/vectors/{query}/?page={pageno}
+    results_xpath: //a[contains(@class,'vector-item')]
+    url_xpath: ./@href
+    title_xpath: ./@title
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: canva-templates
+    engine: xpath
+    shortcut: canva
+    categories: design
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.canva.com/templates?query={query}&page={pageno}
+    results_xpath: //div[@data-test='template-card']
+    url_xpath: .//a/@href
+    title_xpath: .//img/@alt
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  # ============================================================= #
+  #  VIDEOS - Native Engines
+  # ============================================================= #
   - name: youtube noapi
     engine: youtube_noapi
     shortcut: yt
@@ -185,15 +318,22 @@ engines:
     shortcut: dm
     categories: videos
 
-  # --- NEWS (Native) ---
+  - name: vimeo
+    engine: vimeo
+    shortcut: vm
+    categories: videos
+
+  # ============================================================= #
+  #  NEWS - Native Engines
+  # ============================================================= #
   - name: bing news
     engine: bing_news
     shortcut: bin
     categories: news
 
-  - name: startpage news
-    engine: startpage
-    shortcut: spn
+  - name: google news
+    engine: google_news
+    shortcut: gon
     categories: news
 
   - name: reddit
@@ -206,13 +346,17 @@ engines:
     shortcut: hn
     categories: [news, it]
 
-  # --- NEWS (XPath) ---
+  # ============================================================= #
+  #  NEWS - Custom XPath
+  # ============================================================= #
   - name: bbc
     engine: xpath
     shortcut: bbc
     categories: news
-    paging: false
-    search_url: https://www.bbc.co.uk/search?q={query}
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://www.bbc.co.uk/search?q={query}&page={pageno}
     results_xpath: //div[contains(@class,'ssrcss-')]
     url_xpath: .//a/@href
     title_xpath: .//h2
@@ -224,6 +368,8 @@ engines:
     shortcut: grd
     categories: news
     paging: true
+    first_page_num: 1
+    page_size: 10
     search_url: https://www.theguardian.com/search?q={query}&page={pageno}
     results_xpath: //li[contains(@class,'fc-slice__item')]
     url_xpath: .//a/@href
@@ -231,7 +377,23 @@ engines:
     content_xpath: .//p
     timeout: 10.0
 
-  # --- MUSIC (Native) ---
+  - name: techcrunch
+    engine: xpath
+    shortcut: tc
+    categories: [news, it]
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://search.techcrunch.com/search?p={query}&fr={pageno}
+    results_xpath: //div[@class='compArticleList']//li
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//p
+    timeout: 10.0
+
+  # ============================================================= #
+  #  MUSIC - Native Engines
+  # ============================================================= #
   - name: soundcloud
     engine: soundcloud
     shortcut: sc
@@ -242,7 +404,14 @@ engines:
     shortcut: bdc
     categories: music
 
-  # --- DEV (Native) ---
+  - name: genius
+    engine: genius
+    shortcut: gen
+    categories: music
+
+  # ============================================================= #
+  #  DEV - Native Engines
+  # ============================================================= #
   - name: github
     engine: github
     shortcut: gh
@@ -259,35 +428,338 @@ engines:
     api_site: 'stackoverflow'
     categories: [dev, it]
 
-  # --- DEV (XPath) ---
+  - name: askubuntu
+    engine: stackexchange
+    shortcut: au
+    api_site: 'askubuntu'
+    categories: [dev, it]
+
+  - name: superuser
+    engine: stackexchange
+    shortcut: su
+    api_site: 'superuser'
+    categories: [dev, it]
+
+  # ============================================================= #
+  #  DEV - Custom Engines (Code Search, Snippets)
+  # ============================================================= #
   - name: codeberg
     engine: xpath
     shortcut: cb
     categories: [dev, files]
-    search_url: https://codeberg.org/api/v1/repos/search?q={query}&limit=10
-    url_query: html_url
-    title_query: name
-    content_query: description
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://codeberg.org/explore/repos?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'repository-item')]
+    url_xpath: .//a/@href
+    title_xpath: .//h3/a
+    content_xpath: .//p[contains(@class,'description')]
+    timeout: 10.0
 
-  - name: gitlab snippets
+  - name: sourcehut
     engine: xpath
-    shortcut: gls
+    shortcut: srht
     categories: dev
     paging: true
-    search_url: https://gitlab.com/search?search={query}&scope=snippets&page={pageno}
-    results_xpath: //li[contains(@class,'snippet-row')]
+    first_page_num: 1
+    page_size: 20
+    search_url: https://sr.ht/projects?search={query}&page={pageno}
+    results_xpath: //div[@class='event']
+    url_xpath: .//a/@href
+    title_xpath: .//a/strong
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: grep-app
+    engine: xpath
+    shortcut: grep
+    categories: [dev, tools]
+    paging: false
+    search_url: https://grep.app/search?q={query}
+    results_xpath: //div[@class='result-item']
+    url_xpath: .//a/@href
+    title_xpath: .//div[@class='file-path']
+    content_xpath: .//code
+    timeout: 10.0
+
+  - name: searchcode
+    engine: xpath
+    shortcut: scode
+    categories: dev
+    paging: true
+    first_page_num: 0
+    page_size: 20
+    search_url: https://searchcode.com/?q={query}&p={pageno}
+    results_xpath: //div[@class='result']
+    url_xpath: .//a/@href
+    title_xpath: .//a
+    content_xpath: .//div[@class='snippet']
+    timeout: 10.0
+
+  - name: codepen
+    engine: xpath
+    shortcut: pen
+    categories: [dev, design]
+    paging: true
+    first_page_num: 1
+    page_size: 12
+    search_url: https://codepen.io/search/pens?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'single-item')]
+    url_xpath: .//a[@class='item-title']/@href
+    title_xpath: .//a[@class='item-title']
+    content_xpath: .//p[@class='item-description']
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: devto
+    engine: xpath
+    shortcut: devto
+    categories: [dev, news]
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://dev.to/search?q={query}&page={pageno}
+    results_xpath: //div[@class='crayons-story']
+    url_xpath: .//a/@href
+    title_xpath: .//h2/a
+    content_xpath: .//div[@class='crayons-story__tags']
+    timeout: 10.0
+
+  # ============================================================= #
+  #  PACKAGES - Native & Custom
+  # ============================================================= #
+  - name: pypi
+    engine: pypi
+    shortcut: pypi
+    categories: packages
+
+  - name: npm
+    engine: xpath
+    shortcut: npm
+    categories: packages
+    paging: true
+    first_page_num: 0
+    page_size: 20
+    search_url: https://www.npmjs.com/search?q={query}&page={pageno}
+    results_xpath: //section//a[contains(@class,'db')]
+    url_xpath: ./@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: packagist
+    engine: xpath
+    shortcut: pack
+    categories: packages
+    paging: true
+    first_page_num: 1
+    page_size: 15
+    search_url: https://packagist.org/search/?q={query}&page={pageno}
+    results_xpath: //div[@class='package-item']
+    url_xpath: .//h4/a/@href
+    title_xpath: .//h4/a
+    content_xpath: .//p[@class='description']
+    timeout: 10.0
+
+  - name: crates-io
+    engine: xpath
+    shortcut: crate
+    categories: packages
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://crates.io/search?q={query}&page={pageno}
+    results_xpath: //div[@class='crate-row']
+    url_xpath: .//a/@href
+    title_xpath: .//a[@class='crate-name']
+    content_xpath: .//div[@class='description']
+    timeout: 10.0
+
+  - name: docker-hub
+    engine: docker_hub
+    shortcut: dh
+    categories: packages
+
+  # ============================================================= #
+  #  DOCUMENTATION
+  # ============================================================= #
+  - name: mdn
+    engine: xpath
+    shortcut: mdn
+    categories: docs
+    paging: true
+    first_page_num: 1
+    page_size: 10
+    search_url: https://developer.mozilla.org/en-US/search?q={query}&page={pageno}
+    results_xpath: //div[@class='result-item']
+    url_xpath: .//a/@href
+    title_xpath: .//h4
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: devdocs
+    engine: xpath
+    shortcut: dd
+    categories: docs
+    paging: false
+    search_url: https://devdocs.io/#q={query}
+    results_xpath: //a[@class='_list-item']
+    url_xpath: ./@href
+    title_xpath: .//span[@class='_list-text']
+    timeout: 8.0
+
+  - name: readthedocs
+    engine: xpath
+    shortcut: rtd
+    categories: docs
+    paging: true
+    first_page_num: 1
+    page_size: 15
+    search_url: https://readthedocs.org/search/?q={query}&type=file&page={pageno}
+    results_xpath: //li[@class='search-result-item']
     url_xpath: .//a/@href
     title_xpath: .//a
     content_xpath: .//p
     timeout: 10.0
 
-  # --- IT (Native) ---
+  # ============================================================= #
+  #  AI & ML TOOLS
+  # ============================================================= #
+  - name: huggingface
+    engine: xpath
+    shortcut: hf
+    categories: ai
+    paging: true
+    first_page_num: 1
+    page_size: 15
+    search_url: https://huggingface.co/models?search={query}&p={pageno}
+    results_xpath: //article[contains(@class,'overview-card-wrapper')]
+    url_xpath: .//a/@href
+    title_xpath: .//h4
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: replicate
+    engine: xpath
+    shortcut: rep
+    categories: [ai, tools]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://replicate.com/explore?query={query}&page={pageno}
+    results_xpath: //div[@class='model-card']
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: civitai
+    engine: xpath
+    shortcut: civ
+    categories: [ai, design]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://civitai.com/models?query={query}&page={pageno}
+    results_xpath: //div[@class='card']
+    url_xpath: .//a/@href
+    title_xpath: .//h2
+    content_xpath: .//p
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: paperswithcode
+    engine: xpath
+    shortcut: pwc
+    categories: [ai, science]
+    paging: true
+    first_page_num: 1
+    page_size: 25
+    search_url: https://paperswithcode.com/search?q={query}&page={pageno}
+    results_xpath: //div[contains(@class,'paper-card')]
+    url_xpath: .//h1/a/@href
+    title_xpath: .//h1/a
+    content_xpath: .//p[@class='paper-abstract']
+    timeout: 10.0
+
+  # ============================================================= #
+  #  ALTERNATIVES & TOOLS DISCOVERY
+  # ============================================================= #
+  - name: alternativeto
+    engine: xpath
+    shortcut: alt
+    categories: [alternatives, tools]
+    paging: true
+    first_page_num: 1
+    page_size: 25
+    search_url: https://alternativeto.net/browse/search?q={query}&page={pageno}
+    results_xpath: //div[@class='app-card']
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p[@class='app-card__description']
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: producthunt
+    engine: xpath
+    shortcut: ph
+    categories: [alternatives, tools]
+    paging: false
+    search_url: https://www.producthunt.com/search?q={query}
+    results_xpath: //li
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: slant
+    engine: xpath
+    shortcut: slant
+    categories: alternatives
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://www.slant.co/search?query={query}&page={pageno}
+    results_xpath: //div[@class='result-item']
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    timeout: 10.0
+
+  - name: stackshare
+    engine: xpath
+    shortcut: stack
+    categories: [alternatives, dev]
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://stackshare.io/search/q={query}&page={pageno}
+    results_xpath: //div[@class='tool-card']
+    url_xpath: .//a/@href
+    title_xpath: .//h3
+    content_xpath: .//p
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  # ============================================================= #
+  #  IT & TECH
+  # ============================================================= #
   - name: arch linux wiki
     engine: archlinux
     shortcut: al
     categories: it
 
-  # --- SCIENCE (Native) ---
+  - name: fdroid
+    engine: fdroid
+    shortcut: fd
+    categories: it
+
+  # ============================================================= #
+  #  SCIENCE - Native Engines
+  # ============================================================= #
   - name: arxiv
     engine: arxiv
     shortcut: arx
@@ -313,7 +785,9 @@ engines:
     shortcut: se
     categories: science
 
-  # --- FILES (Native) ---
+  # ============================================================= #
+  #  FILES & TORRENTS - Native Engines
+  # ============================================================= #
   - name: annas archive
     engine: annas_archive
     shortcut: an
@@ -339,12 +813,16 @@ engines:
     shortcut: bt4g
     categories: files
 
-  # --- FILES (XPath) ---
+  # ============================================================= #
+  #  FILES - Custom XPath
+  # ============================================================= #
   - name: lime torrents
     engine: xpath
     shortcut: lime
     categories: files
     paging: true
+    first_page_num: 1
+    page_size: 20
     search_url: https://www.limetorrents.lol/search/all/{query}/seeds/{pageno}/
     results_xpath: //table[contains(@class,'table2')]//tr[position()>1]
     url_xpath: .//a/@href
@@ -352,12 +830,75 @@ engines:
     content_xpath: .//td[2]
     timeout: 10.0
 
+  - name: z-library
+    engine: xpath
+    shortcut: zlib
+    categories: files
+    paging: true
+    first_page_num: 1
+    page_size: 25
+    search_url: https://singlelogin.re/s/{query}?page={pageno}
+    results_xpath: //div[@class='book-item']
+    url_xpath: .//h3/a/@href
+    title_xpath: .//h3/a
+    content_xpath: .//div[@class='authors']
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  - name: archive-org
+    engine: xpath
+    shortcut: arc
+    categories: files
+    paging: true
+    first_page_num: 1
+    page_size: 50
+    search_url: https://archive.org/search.php?query={query}&page={pageno}
+    results_xpath: //div[@class='item-ia']
+    url_xpath: .//a[@class='stealth']/@href
+    title_xpath: .//div[@class='ttl']
+    content_xpath: .//div[@class='by']
+    thumbnail_xpath: .//img/@src
+    timeout: 10.0
+
+  # ============================================================= #
+  #  SOCIAL MEDIA
+  # ============================================================= #
+  - name: mastodon
+    engine: xpath
+    shortcut: mast
+    categories: social
+    paging: false
+    search_url: https://mastodon.social/api/v2/search?q={query}&type=statuses&limit=20
+    results_xpath: //div[@class='status']
+    url_xpath: .//a/@href
+    title_xpath: .//div[@class='status__content']
+    content_xpath: .//div[@class='status__content']
+    timeout: 10.0
+
+  - name: lemmy
+    engine: xpath
+    shortcut: lem
+    categories: social
+    paging: true
+    first_page_num: 1
+    page_size: 20
+    search_url: https://lemmy.ml/search?q={query}&type=All&page={pageno}
+    results_xpath: //div[@class='post-listing']
+    url_xpath: .//a/@href
+    title_xpath: .//a[@class='post-title']
+    content_xpath: .//div[@class='post-body']
+    timeout: 10.0
+
+# ============================================================= #
+#  SEARCH SETTINGS
+# ============================================================= #
 search:
   safe_search: 0
   autocomplete: "duckduckgo"
   autocomplete_min: 4
   favicon_resolver: "duckduckgo"
   default_lang: "auto"
+  max_results: 100
   ban_time_on_fail: 5
   max_ban_time_on_fail: 60
   suspended_times:
@@ -371,7 +912,11 @@ search:
     - html
     - json
     - rss
+    - csv
 
+# ============================================================= #
+#  SERVER SETTINGS
+# ============================================================= #
 server:
   port: 8888
   bind_address: "0.0.0.0"
@@ -388,6 +933,9 @@ server:
     X-Robots-Tag: noindex, nofollow
     Referrer-Policy: no-referrer
 
+# ============================================================= #
+#  UI SETTINGS
+# ============================================================= #
 ui:
   static_path: ""
   templates_path: ""
@@ -400,9 +948,11 @@ ui:
   hotkeys: default
   url_formatting: pretty
 
+# ============================================================= #
+#  OUTGOING REQUESTS
+# ============================================================= #
 outgoing:
   request_timeout: 15.0
-  # Default user agent - no suffix
   useragent_suffix: ""
   pool_connections: 100
   pool_maxsize: 20
@@ -413,6 +963,9 @@ outgoing:
     https:
       - http://udizufzc-rotate:2ile7xfmbivj@p.webshare.io:80
 
+# ============================================================= #
+#  PLUGINS
+# ============================================================= #
 plugins:
   searx.plugins.calculator.SXNGPlugin:
     active: true
@@ -431,6 +984,9 @@ plugins:
   searx.plugins.tracker_url_remover.SXNGPlugin:
     active: true
 
+# ============================================================= #
+#  DOI RESOLVERS
+# ============================================================= #
 doi_resolvers:
   oadoi.org: 'https://oadoi.org/'
   doi.org: 'https://doi.org/'
